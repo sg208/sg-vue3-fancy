@@ -8,5 +8,5 @@
 import { storeToRefs } from 'pinia';
 import { useNavigationStore } from '../../store/navigations';
 
-const { header: headers, footer } = storeToRefs(useNavigationStore())
+const { header: headers, footer: footers } = storeToRefs(useNavigationStore())
 </script>

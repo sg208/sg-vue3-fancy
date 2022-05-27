@@ -12,13 +12,21 @@ This is a simple template with Vue 3 and couple of simple packages.
 - [Pinia (state management)](https://pinia.vuejs.org/)
 - More on the way ...
 
-## Deployment
+## Demo
 
-Not sure yet, maybe Cloudfare Pages :)
+https://sg-vue3-fancy.onrender.com/
 
-## Deployment notes
+## Deployment notes for render.com
 
 - Node version: `16.15.0`
 - Target: `Single Page App`
 - Public folder: `dist`
 - Build command: `npm run build`
+- Create a rewrite rules:
+    - Go to your project, then go to `Redirects/Rewrites`
+    - Add the following:
+        - Source: `/*`
+        - Destination: `/index.html`
+        - Action: `Rewrite`
+        - [HELPDER DOCS](https://dashboard.render.com/static/srv-ca8lkqvd17ccpsrnbfng/redirects)
+
