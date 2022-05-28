@@ -8,6 +8,8 @@ This is a simple template with Vue 3 and couple of simple packages.
 - [Vite (bundler)](https://vitejs.dev/)
 - [File based routing](https://github.com/hannoeru/vite-plugin-pages)
 - [Auto import components](https://github.com/antfu/unplugin-vue-components)
+- [Auto import composables and modules](https://github.com/antfu/unplugin-auto-import)
+    - Resolver https://github.com/dishait/vite-auto-import-resolvers/blob/main/README_EN.md
 - [Tailwind CSS (V3)](https://tailwindcss.com/)
 - [Pinia (state management)](https://pinia.vuejs.org/)
 - More on the way ...
