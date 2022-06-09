@@ -1,11 +1,14 @@
 {
   "name": "sg-vue3-fancy",
+  "author": "github/208",
   "private": true,
-  "version": "0.0.3",
+  "version": "0.0.4",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "format": "prettier .  --write"
   },
   "dependencies": {
     "pinia": "^2.0.14",
@@ -13,15 +16,24 @@
     "vue-router": "^4.0.15"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.5.2",
+    "@tailwindcss/line-clamp": "^0.4.0",
+    "@tailwindcss/typography": "^0.5.2",
     "@vitejs/plugin-vue": "^2.3.3",
     "autoprefixer": "^10.4.7",
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-vue": "^9.1.0",
     "postcss": "^8.4.14",
+    "prettier": "2.6.2",
     "sass": "^1.52.1",
-    "tailwindcss": "^3.0.24",
+    "tailwindcss": "^3.1.1",
     "unplugin-auto-import": "^0.8.5",
     "unplugin-vue-components": "^0.19.6",
     "vite": "^2.9.9",
     "vite-auto-import-resolvers": "^3.0.1",
+    "vite-plugin-eslint": "^1.6.1",
     "vite-plugin-pages": "^0.23.0"
   }
 }

@@ -10,7 +10,7 @@ This is a simple template utilizing Vue 3 and couple of simple packages to make 
 - [Auto import components](https://github.com/antfu/unplugin-vue-components)
 - [Auto import composables and modules](https://github.com/antfu/unplugin-auto-import)
     - Resolver https://github.com/dishait/vite-auto-import-resolvers/blob/main/README_EN.md
-- [Tailwind CSS (V3)](https://tailwindcss.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
 - [Pinia (state management)](https://pinia.vuejs.org/)
 - Deployed to Cloudflare Pages
 - i18n ... Coming soon!
@@ -23,7 +23,7 @@ This project is deployed to Cloudflare Pages.
 
 https://sg-vue3-fancy.engg.me/
 
-## Couple of 
+## Couple of things
 
 - Node version: `16.15.0`
 - Target: `Single Page App`
