@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "pinia": "^2.0.14",
+    "sg208-button": "^0.0.6-sg",
     "vue": "^3.2.25",
     "vue-router": "^4.0.15"
   },

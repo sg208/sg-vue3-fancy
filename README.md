@@ -9,13 +9,14 @@ This is a simple template utilizing Vue 3 and couple of simple packages to make 
 - [File based routing](https://github.com/hannoeru/vite-plugin-pages)
 - [Auto import components](https://github.com/antfu/unplugin-vue-components)
 - [Auto import composables and modules](https://github.com/antfu/unplugin-auto-import)
-    - Resolver https://github.com/dishait/vite-auto-import-resolvers/blob/main/README_EN.md
+  - Resolver https://github.com/dishait/vite-auto-import-resolvers/blob/main/README_EN.md
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Pinia (state management)](https://pinia.vuejs.org/)
 - Deployed to Cloudflare Pages
 - i18n ... Coming soon!
 - Meta tags ... Coming soon!
 - Layouts ... Coming soon!
+- [Sg208 Vue Component Library](https://www.npmjs.com/package/sg208-button?activeTab=readme)
 
 ## Demo
 
@@ -25,7 +26,7 @@ https://sg-vue3-fancy.engg.me/
 
 ## Couple of things
 
-- Node version: `16.15.0`
+- Node version: `18.12.1`
 - Target: `Single Page App`
 - Public folder: `dist`
 - Build command: `npm run build`
