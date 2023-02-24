@@ -11,6 +11,7 @@ const count = ref(0);
 <template>
   <h1>{{ msg }}</h1>
   <p>This is just example of Hello World auto importing</p>
+  <sg208-button>Hello hello again from component</sg208-button>
 </template>
 
 <style scoped>
