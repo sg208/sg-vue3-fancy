@@ -1,21 +1,21 @@
-<script setup></script>
+<script setup>
+import Nav from "./components/layouts/Nav.vue";
+</script>
 
 <template>
-  <header class="text-gray-900 bg-white border-b border-gray-200">
+  <div class="min-h-screen bg-white">
     <Nav />
-  </header>
-  <main class="pt-10">
-    <router-view />
-  </main>
+    <main>
+      <router-view />
+    </main>
+  </div>
 </template>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

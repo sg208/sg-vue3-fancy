@@ -7,20 +7,20 @@ export const useNavigationStore = defineStore(
       return {
         header: [
           {
-            name: "Home",
-            path: "/",
+            name: "Breakfast",
+            path: "/breakfast",
           },
           {
-            name: "Features",
-            path: "/features",
+            name: "Lunch",
+            path: "/lunch",
           },
           {
-            name: "Blog",
-            path: "/blog",
+            name: "Dinner",
+            path: "/dinner",
           },
           {
-            name: "Contact",
-            path: "/contact",
+            name: "Desserts",
+            path: "/desserts",
           },
         ],
         footer: [
