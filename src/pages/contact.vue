@@ -1,5 +1,5 @@
 <script setup>
-import "sg208-button/dist/style.css";
+import "sg208-button/style.css";
 import { SgButton, SgButtonText } from "sg208-button";
 </script>
 

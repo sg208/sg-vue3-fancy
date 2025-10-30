@@ -10,5 +10,5 @@
 
 <script setup>
 import { SgButtonText } from "sg208-button";
-import "sg208-button/dist/style.css";
+import "sg208-button/style.css";
 </script>

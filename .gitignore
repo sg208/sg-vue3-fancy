@@ -1,3 +1,39 @@
+# Node dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+dist/
+.cache/
+.temp/
+.vite/
+
+# Tooling caches created during this session
+.npm-cache/
+.ncu-config/
+
+# Environment files
+.env
+.env.*.local
+
+# OS/Editor
+.DS_Store
+.vscode/
+.idea/
+
+# Testing/coverage
+coverage/
+
+# TypeScript
+*.tsbuildinfo
 Skip to content
 Search or jump to…
 Pull requests
