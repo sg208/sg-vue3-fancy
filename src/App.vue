@@ -1,8 +1,7 @@
-<script setup>
-</script>
+<script setup></script>
 
 <template>
-  <header>
+  <header class="text-gray-900 bg-white border-b border-gray-200">
     <Nav />
   </header>
   <main class="pt-10">

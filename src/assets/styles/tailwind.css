@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  /* Force light background globally to avoid unexpected dark surfaces */
+  html,
+  body,
+  #app {
+    @apply text-gray-900 bg-white;
+  }
+}
+
+@layer components {
+  /* Ensure PrimeVue Card has accessible contrast */
+  .p-card {
+    @apply text-gray-900 bg-white border border-gray-200 shadow-sm;
+  }
+  .p-card .p-card-title {
+    @apply text-gray-900;
+  }
+  .p-card .p-card-subtitle {
+    @apply text-gray-600;
+  }
+
+  /* Ensure PrimeVue Dialog uses light surface */
+  .p-dialog,
+  .p-dialog .p-dialog-header,
+  .p-dialog .p-dialog-content,
+  .p-dialog .p-dialog-footer {
+    @apply text-gray-900 bg-white;
+  }
+}

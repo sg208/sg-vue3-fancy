@@ -1,9 +1,5 @@
 <template>
-  <div
-    v-for="headerItem in headers"
-    :key="headerItem.name"
-    class="inline-block mr-5"
-  >
+  <div v-for="headerItem in headers" :key="headerItem.name" class="inline-block mr-5">
     / <router-link :to="headerItem.path">{{ headerItem.name }}</router-link>
   </div>
 </template>
