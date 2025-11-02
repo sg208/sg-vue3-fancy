@@ -58,12 +58,12 @@
                   </div>
                 </div>
               </div>
-              <button
-                class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-colors"
-                @click="openRecipe(featured)"
+              <router-link
+                :to="`/recipe/${featured.id}`"
+                class="block w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-colors text-center"
               >
                 View Full Recipe
-              </button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -87,10 +87,11 @@
         </div>
 
         <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div
+          <router-link
             v-for="recipe in displayedRecipes"
             :key="recipe.id"
-            class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer group"
+            :to="`/recipe/${recipe.id}`"
+            class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer group block"
           >
             <div class="relative">
               <img
@@ -114,10 +115,7 @@
               <p class="text-gray-600 text-sm mb-4 line-clamp-2">
                 {{ preview(recipe.instructions, 100) }}
               </p>
-              <button
-                class="text-orange-500 font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all"
-                @click="openRecipe(recipe)"
-              >
+              <div class="text-orange-500 font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
                 View Recipe
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
@@ -127,9 +125,9 @@
                     d="M9 5l7 7-7 7"
                   />
                 </svg>
-              </button>
+              </div>
             </div>
-          </div>
+          </router-link>
         </div>
       </div>
     </section>
@@ -273,64 +271,14 @@
       </div>
     </footer>
   </div>
-
-  <!-- Recipe Dialog -->
-  <Dialog v-model:visible="dialogVisible" modal :style="{ width: '40rem' }" class="rounded-2xl">
-    <template #header>
-      <h3 class="text-2xl font-bold">{{ active?.name }}</h3>
-    </template>
-    <template v-if="active">
-      <img
-        :src="imageFor(active)"
-        :alt="active.name"
-        class="w-full h-64 object-cover rounded-lg mb-4"
-      />
-      <div class="flex items-center gap-4 mb-4 text-sm">
-        <span class="text-gray-600">{{ active.cuisine }}</span>
-        <span class="text-gray-400">•</span>
-        <span class="text-gray-600">{{ active.difficulty }}</span>
-        <span class="text-gray-400">•</span>
-        <span class="text-gray-600">Prep: {{ active.prepTimeMinutes }}m</span>
-        <span class="text-gray-400">•</span>
-        <span class="text-gray-600">Cook: {{ active.cookTimeMinutes }}m</span>
-      </div>
-      <p class="text-gray-700 mb-6">{{ preview(active.instructions, 1000) }}</p>
-      <div class="mb-4">
-        <h4 class="font-bold text-lg mb-3">Ingredients</h4>
-        <ul class="space-y-2 max-h-60 overflow-auto">
-          <li
-            v-for="ingredient in active.ingredients"
-            :key="ingredient"
-            class="flex items-start gap-2"
-          >
-            <svg
-              class="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            <span class="text-gray-700">{{ ingredient }}</span>
-          </li>
-        </ul>
-      </div>
-    </template>
-  </Dialog>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
-import Dialog from "primevue/dialog";
 
 const loading = ref(true);
 const recipes = ref([]);
 const featured = ref(null);
-const dialogVisible = ref(false);
-const active = ref(null);
 const email = ref("");
 
 const displayedRecipes = computed(() => {
@@ -347,11 +295,6 @@ function imageFor(r) {
 function preview(instructions, max = 220) {
   const text = Array.isArray(instructions) ? instructions.join(" ") : String(instructions || "");
   return text.length > max ? text.slice(0, max) + "…" : text;
-}
-
-function openRecipe(r) {
-  active.value = r;
-  dialogVisible.value = true;
 }
 
 function subscribe() {
