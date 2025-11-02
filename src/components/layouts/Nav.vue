@@ -12,19 +12,6 @@
         <span class="text-xl font-bold text-gray-900">RecipeHub</span>
       </router-link>
 
-      <!-- Navigation Links -->
-      <div class="flex items-center space-x-8">
-        <router-link
-          v-for="headerItem in headers"
-          :key="headerItem.name"
-          :to="headerItem.path"
-          class="text-gray-700 hover:text-gray-900 font-medium transition-colors"
-          active-class="text-gray-900"
-        >
-          {{ headerItem.name }}
-        </router-link>
-      </div>
-
       <!-- Submit Recipe Button -->
       <router-link
         to="/contact"
@@ -37,8 +24,4 @@
 </template>
 
 <script setup>
-import { storeToRefs } from "pinia";
-import { useNavigationStore } from "../../store/navigations";
-
-const { header: headers } = storeToRefs(useNavigationStore());
 </script>
