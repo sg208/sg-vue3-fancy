@@ -12,6 +12,7 @@ This is a simple template utilizing Vue 3 and couple of simple packages to make 
   - Resolver https://github.com/dishait/vite-auto-import-resolvers/blob/main/README_EN.md
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Pinia (state management)](https://pinia.vuejs.org/)
+- [PrimeVue (UI component library)](https://primevue.org/)
 - Deployed to Cloudflare Pages
 - i18n ... Coming soon!
 - Meta tags ... Coming soon!
@@ -26,7 +27,7 @@ https://sg-vue3-fancy.engg.me/
 
 ## Couple of things
 
-- Node version: `18.12.1`
+- Node version: `>=22.12.0`
 - Target: `Single Page App`
 - Public folder: `dist`
 - Build command: `npm run build`
