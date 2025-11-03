@@ -5,10 +5,3 @@
     <router-link to="/contact" class="hover:text-orange-500">Contact</router-link>
   </div>
 </template>
-
-<script setup lang="ts">
-</script>
-
-
-
-
