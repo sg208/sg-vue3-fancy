@@ -8,7 +8,12 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import counter from "../composables/counter";
+import useSomething from "../composables/useSomething";
+import useSomething2 from "../composables/useSomething2";
+import useSomething3 from "../composables/useSomething3";
+
 const something = counter;
 const { someA, someB } = useSomething();
 const { singA, singB } = useSomething2();

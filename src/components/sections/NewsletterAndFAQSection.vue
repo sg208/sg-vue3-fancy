@@ -9,13 +9,15 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import NewsletterSection from "../layouts/NewsletterSection.vue";
 import FAQSection from "../layouts/FAQSection.vue";
 
-const emit = defineEmits(["subscribe"]);
+const emit = defineEmits<{
+  subscribe: [email: string];
+}>();
 
-const handleSubscribe = (email) => {
+const handleSubscribe = (email: string) => {
   emit("subscribe", email);
 };
 </script>

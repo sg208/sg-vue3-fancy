@@ -2,7 +2,7 @@
   <div class="text-sm text-gray-500">© 2024 RecipeHub. All Rights Reserved.</div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 </script>
 
 

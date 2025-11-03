@@ -17,20 +17,15 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import FeaturedRecipe from "../recipes/FeaturedRecipe.vue";
 import FeaturedRecipeSkeleton from "../recipes/FeaturedRecipeSkeleton.vue";
+import type { Recipe } from "../../utils/recipeUtils";
 
-defineProps({
-  featured: {
-    type: Object,
-    default: null,
-  },
-  loading: {
-    type: Boolean,
-    default: false,
-  },
-});
+defineProps<{
+  featured?: Recipe | null;
+  loading?: boolean;
+}>();
 </script>
 
 

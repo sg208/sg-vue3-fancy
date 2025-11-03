@@ -40,20 +40,19 @@
   </router-link>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from "vue";
-import { getRecipeImageUrl, previewText } from "../../utils/recipeUtils";
+import { getRecipeImageUrl, previewText, type Recipe } from "../../utils/recipeUtils";
 
-const props = defineProps({
-  recipe: {
-    type: Object,
-    required: true,
-  },
-  previewLength: {
-    type: Number,
-    default: 100,
-  },
-});
+const props = withDefaults(
+  defineProps<{
+    recipe: Recipe;
+    previewLength?: number;
+  }>(),
+  {
+    previewLength: 100,
+  }
+);
 
 const imageUrl = computed(() => getRecipeImageUrl(props.recipe));
 const preview = computed(() => previewText(props.recipe.instructions, props.previewLength));

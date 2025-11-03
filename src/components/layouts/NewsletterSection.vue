@@ -23,11 +23,13 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 
 const email = ref("");
-const emit = defineEmits(["subscribe"]);
+const emit = defineEmits<{
+  subscribe: [email: string];
+}>();
 
 const handleSubscribe = () => {
   if (email.value) {
