@@ -21,20 +21,15 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import RecipeCard from "../recipes/RecipeCard.vue";
 import RecipeCardSkeleton from "../recipes/RecipeCardSkeleton.vue";
+import type { Recipe } from "../../utils/recipeUtils";
 
-defineProps({
-  recipes: {
-    type: Array,
-    default: () => [],
-  },
-  loading: {
-    type: Boolean,
-    default: false,
-  },
-});
+defineProps<{
+  recipes?: Recipe[];
+  loading?: boolean;
+}>();
 </script>
 
 

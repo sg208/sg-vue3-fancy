@@ -29,7 +29,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 
 const ChevronRightIcon = {
@@ -45,9 +45,9 @@ const ChevronRightIcon = {
   `,
 };
 
-const openQuestion = ref(null);
+const openQuestion = ref<number | null>(null);
 
-const toggleQuestion = (index) => {
+const toggleQuestion = (index: number) => {
   openQuestion.value = openQuestion.value === index ? null : index;
   // TODO: Implement accordion behavior
 };

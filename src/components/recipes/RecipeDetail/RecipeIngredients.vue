@@ -14,7 +14,9 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { Recipe } from "../../../utils/recipeUtils";
+
 const CheckIcon = {
   template: `
     <svg
@@ -31,12 +33,9 @@ const CheckIcon = {
   `,
 };
 
-defineProps({
-  recipe: {
-    type: Object,
-    required: true,
-  },
-});
+defineProps<{
+  recipe: Recipe;
+}>();
 </script>
 
 
