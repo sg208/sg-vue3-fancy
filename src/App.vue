@@ -1,5 +1,6 @@
 <script setup>
 import Nav from "./components/layouts/Nav.vue";
+import Footer from "./components/layouts/Footer.vue";
 import { VueQueryDevtools } from "@tanstack/vue-query-devtools";
 
 const isDev = import.meta.env.DEV;
@@ -11,6 +12,7 @@ const isDev = import.meta.env.DEV;
     <main>
       <router-view />
     </main>
+    <Footer />
     <VueQueryDevtools v-if="isDev" />
   </div>
 </template>
