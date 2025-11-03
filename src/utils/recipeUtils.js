@@ -61,15 +61,27 @@ export function getDisplayedRecipes(recipes, featuredRecipe, limit = 6) {
 
 /**
  * Parse ingredient to display name
+ * Removes leading numbers/measurements (e.g., "2 cups", "1/2 tsp") but preserves
+ * ingredients that start with words (e.g., "black pepper", "olive oil")
  * @param {string} ingredient - Full ingredient string
  * @returns {string} Display name
  */
 export function formatIngredient(ingredient) {
+  if (!ingredient || typeof ingredient !== "string") {
+    return ingredient;
+  }
+  
   const parts = ingredient.split(" ");
-  // Remove first part if it's a number/measurement
-  if (/^\d+\/\d+|\d+(\.\d+)?/.test(parts[0])) {
+  const firstPart = parts[0];
+  
+  // Only remove first part if it's a number or fraction (e.g., "2", "1/2", "0.5")
+  // Use anchored regex to ensure we match at the start of the first word only
+  const isMeasurement = /^(\d+\/\d+|\d+(\.\d+)?)$/.test(firstPart);
+  
+  if (isMeasurement && parts.length > 1) {
     return parts.slice(1).join(" ") || ingredient;
   }
+  
   return ingredient;
 }
 
