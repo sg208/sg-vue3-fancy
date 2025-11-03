@@ -11,7 +11,10 @@ This is a simple template utilizing Vue 3 and couple of simple packages to make 
 - [Auto import composables and modules](https://github.com/antfu/unplugin-auto-import)
   - Resolver https://github.com/dishait/vite-auto-import-resolvers/blob/main/README_EN.md
 - [Tailwind CSS](https://tailwindcss.com/)
-- [Pinia (state management)](https://pinia.vuejs.org/)
+- [TanStack Vue Query (data fetching & caching)](https://tanstack.com/query/latest/docs/vue/overview)
+  - Configured with 5-minute cache (`staleTime`)
+  - Includes smart cache lookup (e.g., recipe details from cached recipes list)
+- [TanStack Vue Query Devtools](https://tanstack.com/query/latest/docs/vue/devtools) (development only)
 - [PrimeVue (UI component library)](https://primevue.org/)
 - Deployed to Cloudflare Pages
 - i18n ... Coming soon!
@@ -21,9 +24,9 @@ This is a simple template utilizing Vue 3 and couple of simple packages to make 
 
 ## Demo
 
-This project is deployed to Cloudflare Pages.
+This project is deployed to Netlify.
 
-https://sg-vue3-fancy.engg.me/
+https://sg-vue3-fancy-engg-me.netlify.app
 
 ## Couple of things
 

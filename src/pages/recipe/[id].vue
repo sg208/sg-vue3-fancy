@@ -13,8 +13,8 @@
       <div v-else-if="recipe" class="space-y-8">
         <!-- Back Button -->
         <button
-          @click="$router.back()"
           class="flex items-center gap-2 text-gray-600 hover:text-orange-500 transition-colors mb-4"
+          @click="$router.back()"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
@@ -107,12 +107,34 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { computed } from "vue";
 import { useRoute } from "vue-router";
+import { useQuery, useQueryClient } from "@tanstack/vue-query";
 
 const route = useRoute();
-const loading = ref(true);
-const recipe = ref(null);
+const queryClient = useQueryClient();
+const recipeId = computed(() => route.params.id);
+
+// Try to get recipe from cached "recipes" query first
+const getCachedRecipe = () => {
+  const cachedRecipes = queryClient.getQueryData(["recipes"]);
+  if (Array.isArray(cachedRecipes)) {
+    const found = cachedRecipes.find((r) => String(r.id) === String(recipeId.value));
+    return found || undefined;
+  }
+  return undefined;
+};
+
+const { data: recipe, isLoading: loading } = useQuery({
+  queryKey: ["recipe", recipeId],
+  queryFn: async () => {
+    const res = await fetch(`https://dummyjson.com/recipes/${recipeId.value}`);
+    if (!res.ok) throw new Error("Failed to fetch recipe");
+    return await res.json();
+  },
+  initialData: getCachedRecipe,
+  enabled: computed(() => !!recipeId.value),
+});
 
 function imageFor(r) {
   if (r && r.image) return r.image;
@@ -126,19 +148,5 @@ function formatInstructions(instructions) {
   }
   return String(instructions || "");
 }
-
-onMounted(async () => {
-  try {
-    const recipeId = route.params.id;
-    const res = await fetch(`https://dummyjson.com/recipes/${recipeId}`);
-    const data = await res.json();
-    recipe.value = data;
-  } catch (e) {
-    console.error("Error fetching recipe:", e);
-    recipe.value = null;
-  } finally {
-    loading.value = false;
-  }
-});
 </script>
 

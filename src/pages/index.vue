@@ -1,57 +1,57 @@
 <template>
-  <div class="min-h-screen bg-white text-gray-900">
+  <div class="min-h-screen text-gray-900 bg-white">
     <!-- Hero Section -->
-    <section class="bg-gradient-to-b from-orange-50 to-white py-16">
-      <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-          <p class="text-orange-500 text-sm font-semibold tracking-wider uppercase mb-2">
+    <section class="py-16 bg-gradient-to-b from-orange-50 to-white">
+      <div class="container px-4 mx-auto">
+        <div class="mb-12 text-center">
+          <p class="mb-2 text-sm font-semibold tracking-wider text-orange-500 uppercase">
             Featured Recipe
           </p>
           <h1 class="text-5xl font-bold text-gray-900">
-            Discover Today's <span class="italic font-serif">Special</span>
+            Discover Today's <span class="font-serif italic">Special</span>
           </h1>
-          <p class="text-gray-600 mt-3">Handpicked recipes that bring joy to your kitchen</p>
+          <p class="mt-3 text-gray-600">Handpicked recipes that bring joy to your kitchen</p>
         </div>
 
         <div v-if="loading" class="max-w-5xl mx-auto">
-          <div class="bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col md:flex-row">
-            <div class="md:w-1/2 h-80 bg-gray-200 animate-pulse"></div>
-            <div class="md:w-1/2 p-8">
-              <div class="h-6 bg-gray-200 rounded w-1/3 mb-4 animate-pulse"></div>
-              <div class="h-8 bg-gray-200 rounded w-3/4 mb-4 animate-pulse"></div>
-              <div class="h-20 bg-gray-200 rounded mb-4 animate-pulse"></div>
+          <div class="flex flex-col overflow-hidden bg-white shadow-lg rounded-3xl md:flex-row">
+            <div class="bg-gray-200 md:w-1/2 h-80 animate-pulse"></div>
+            <div class="p-8 md:w-1/2">
+              <div class="w-1/3 h-6 mb-4 bg-gray-200 rounded animate-pulse"></div>
+              <div class="w-3/4 h-8 mb-4 bg-gray-200 rounded animate-pulse"></div>
+              <div class="h-20 mb-4 bg-gray-200 rounded animate-pulse"></div>
             </div>
           </div>
         </div>
 
         <div v-else-if="featured" class="max-w-5xl mx-auto">
-          <div class="bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col md:flex-row">
-            <div class="md:w-1/2 relative">
+          <div class="flex flex-col overflow-hidden bg-white shadow-lg rounded-3xl md:flex-row">
+            <div class="relative md:w-1/2">
               <img
                 :src="imageFor(featured)"
                 :alt="featured.name"
                 class="w-full h-full object-cover min-h-[400px]"
               />
             </div>
-            <div class="md:w-1/2 p-8 md:p-10 flex flex-col justify-between">
+            <div class="flex flex-col justify-between p-8 md:w-1/2 md:p-10">
               <div>
                 <div class="flex items-center gap-3 mb-4">
-                  <span class="text-orange-500 text-sm font-medium"
+                  <span class="text-sm font-medium text-orange-500"
                     >{{ featured.prepTimeMinutes }} mins</span
                   >
-                  <span class="text-green-600 text-sm font-medium">{{ featured.difficulty }}</span>
+                  <span class="text-sm font-medium text-green-600">{{ featured.difficulty }}</span>
                 </div>
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">{{ featured.name }}</h2>
-                <p class="text-gray-600 mb-6 leading-relaxed">
+                <h2 class="mb-4 text-3xl font-bold text-gray-900">{{ featured.name }}</h2>
+                <p class="mb-6 leading-relaxed text-gray-600">
                   {{ preview(featured.instructions, 180) }}
                 </p>
                 <div class="mb-6">
-                  <h3 class="font-semibold text-gray-900 mb-3">Key Ingredients:</h3>
+                  <h3 class="mb-3 font-semibold text-gray-900">Key Ingredients:</h3>
                   <div class="flex flex-wrap gap-2">
                     <span
                       v-for="ingredient in featured.ingredients.slice(0, 4)"
                       :key="ingredient"
-                      class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
+                      class="px-3 py-1 text-sm text-gray-700 bg-gray-100 rounded-full"
                     >
                       {{ ingredient.split(" ").slice(1).join(" ") || ingredient }}
                     </span>
@@ -60,7 +60,7 @@
               </div>
               <router-link
                 :to="`/recipe/${featured.id}`"
-                class="block w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-colors text-center"
+                class="block w-full py-3 font-semibold text-center text-white transition-colors bg-orange-500 rounded-lg hover:bg-orange-600"
               >
                 View Full Recipe
               </router-link>
@@ -72,50 +72,50 @@
 
     <!-- Collection Section -->
     <section class="py-16 bg-white">
-      <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-          <p class="text-orange-500 text-sm font-semibold tracking-wider uppercase mb-2">
+      <div class="container px-4 mx-auto">
+        <div class="mb-12 text-center">
+          <p class="mb-2 text-sm font-semibold tracking-wider text-orange-500 uppercase">
             All Recipes
           </p>
           <h2 class="text-4xl font-bold text-gray-900">
-            Explore Our <span class="italic font-serif">Collection</span>
+            Explore Our <span class="font-serif italic">Collection</span>
           </h2>
         </div>
 
-        <div v-if="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div v-if="loading" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           <div v-for="n in 6" :key="n" class="bg-gray-100 rounded-2xl h-96 animate-pulse"></div>
         </div>
 
-        <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div v-else class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           <router-link
             v-for="recipe in displayedRecipes"
             :key="recipe.id"
             :to="`/recipe/${recipe.id}`"
-            class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer group block"
+            class="block overflow-hidden transition-shadow bg-white shadow-md cursor-pointer rounded-2xl hover:shadow-xl group"
           >
             <div class="relative">
               <img
                 :src="imageFor(recipe)"
                 :alt="recipe.name"
-                class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                class="object-cover w-full h-56 transition-transform duration-300 group-hover:scale-105"
               />
               <div class="absolute top-4 left-4">
-                <span class="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                <span class="px-3 py-1 text-xs font-bold text-white bg-orange-500 rounded-full">
                   {{ recipe.prepTimeMinutes }} mins
                 </span>
               </div>
             </div>
             <div class="p-6">
-              <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+              <div class="flex items-center gap-2 mb-2 text-sm text-gray-500">
                 <span>{{ recipe.cuisine }}</span>
                 <span>•</span>
                 <span>{{ recipe.difficulty }}</span>
               </div>
-              <h3 class="text-xl font-bold text-gray-900 mb-3">{{ recipe.name }}</h3>
-              <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+              <h3 class="mb-3 text-xl font-bold text-gray-900">{{ recipe.name }}</h3>
+              <p class="mb-4 text-sm text-gray-600 line-clamp-2">
                 {{ preview(recipe.instructions, 100) }}
               </p>
-              <div class="text-orange-500 font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+              <div class="flex items-center gap-1 text-sm font-semibold text-orange-500 transition-all group-hover:gap-2">
                 View Recipe
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
@@ -134,14 +134,14 @@
 
     <!-- Newsletter & FAQ Section -->
     <section class="py-16 bg-gray-50">
-      <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+      <div class="container px-4 mx-auto">
+        <div class="grid max-w-5xl grid-cols-1 gap-12 mx-auto md:grid-cols-2">
           <!-- Newsletter -->
           <div>
-            <h2 class="text-3xl font-bold text-gray-900 mb-2">Ready to cook</h2>
-            <h2 class="text-3xl font-bold italic font-serif text-gray-900 mb-4">delicious</h2>
-            <h2 class="text-3xl font-bold text-gray-900 mb-6">meals?</h2>
-            <p class="text-gray-600 mb-6">
+            <h2 class="mb-2 text-3xl font-bold text-gray-900">Ready to cook</h2>
+            <h2 class="mb-4 font-serif text-3xl italic font-bold text-gray-900">delicious</h2>
+            <h2 class="mb-6 text-3xl font-bold text-gray-900">meals?</h2>
+            <p class="mb-6 text-gray-600">
               Subscribe to our newsletter and get weekly recipe inspiration delivered to your inbox.
             </p>
             <div class="flex gap-2">
@@ -152,7 +152,7 @@
                 class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
               <button
-                class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors whitespace-nowrap"
+                class="px-6 py-3 font-semibold text-white transition-colors bg-orange-500 rounded-lg hover:bg-orange-600 whitespace-nowrap"
                 @click="subscribe"
               >
                 Subscribe
@@ -162,12 +162,12 @@
 
           <!-- FAQ -->
           <div>
-            <h3 class="text-xl font-bold text-gray-900 mb-6">
+            <h3 class="mb-6 text-xl font-bold text-gray-900">
               Got questions? Check out our<br />frequently asked questions.
             </h3>
             <div class="space-y-4">
               <button
-                class="w-full flex items-center justify-between text-left text-gray-700 hover:text-orange-500 transition-colors py-3 border-b border-gray-200"
+                class="flex items-center justify-between w-full py-3 text-left text-gray-700 transition-colors border-b border-gray-200 hover:text-orange-500"
               >
                 <span>How do I submit a recipe?</span>
                 <svg
@@ -185,7 +185,7 @@
                 </svg>
               </button>
               <button
-                class="w-full flex items-center justify-between text-left text-gray-700 hover:text-orange-500 transition-colors py-3 border-b border-gray-200"
+                class="flex items-center justify-between w-full py-3 text-left text-gray-700 transition-colors border-b border-gray-200 hover:text-orange-500"
               >
                 <span>Can I save my favorite recipes?</span>
                 <svg
@@ -203,7 +203,7 @@
                 </svg>
               </button>
               <button
-                class="w-full flex items-center justify-between text-left text-gray-700 hover:text-orange-500 transition-colors py-3 border-b border-gray-200"
+                class="flex items-center justify-between w-full py-3 text-left text-gray-700 transition-colors border-b border-gray-200 hover:text-orange-500"
               >
                 <span>Are the recipes beginner-friendly?</span>
                 <svg
@@ -227,9 +227,9 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 py-8">
-      <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+    <footer class="py-8 bg-white border-t border-gray-200">
+      <div class="container px-4 mx-auto">
+        <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div class="flex items-center gap-4">
             <a href="#" class="text-orange-500 hover:text-orange-600">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -274,12 +274,29 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, watch } from "vue";
+import { useQuery } from "@tanstack/vue-query";
 
-const loading = ref(true);
-const recipes = ref([]);
-const featured = ref(null);
 const email = ref("");
+
+const { data: recipesData, isLoading: loading } = useQuery({
+  queryKey: ["recipes"],
+  queryFn: async () => {
+    const res = await fetch("https://dummyjson.com/recipes");
+    const data = await res.json();
+    return Array.isArray(data?.recipes) ? data.recipes : [];
+  },
+});
+
+const recipes = computed(() => recipesData.value || []);
+
+const featured = ref(null);
+
+watch(recipes, (newRecipes) => {
+  if (newRecipes.length && !featured.value) {
+    featured.value = newRecipes[Math.floor(Math.random() * newRecipes.length)];
+  }
+}, { immediate: true });
 
 const displayedRecipes = computed(() => {
   if (!featured.value) return recipes.value.slice(0, 6);
@@ -303,22 +320,6 @@ function subscribe() {
     email.value = "";
   }
 }
-
-onMounted(async () => {
-  try {
-    const res = await fetch("https://dummyjson.com/recipes");
-    const data = await res.json();
-    const list = Array.isArray(data?.recipes) ? data.recipes : [];
-    recipes.value = list;
-    if (list.length) {
-      featured.value = list[Math.floor(Math.random() * list.length)];
-    }
-  } catch (e) {
-    recipes.value = [];
-  } finally {
-    loading.value = false;
-  }
-});
 </script>
 
 <style scoped>
