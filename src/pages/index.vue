@@ -3,7 +3,6 @@
     <HeroSection :featured="featured" :loading="loading" />
     <RecipeGridSection :recipes="displayedRecipes" :loading="loading" />
     <NewsletterAndFAQSection @subscribe="handleSubscribe" />
-    <Footer />
   </div>
 </template>
 
@@ -14,7 +13,6 @@ import { getRandomRecipe, getDisplayedRecipes } from "../utils/recipeUtils";
 import HeroSection from "../components/sections/HeroSection.vue";
 import RecipeGridSection from "../components/sections/RecipeGridSection.vue";
 import NewsletterAndFAQSection from "../components/sections/NewsletterAndFAQSection.vue";
-import Footer from "../components/layouts/Footer.vue";
 
 const { recipes, isLoading: loading } = useRecipes();
 const featured = ref(null);
