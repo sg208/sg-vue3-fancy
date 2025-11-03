@@ -38,29 +38,29 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from "vue";
-import { getRecipeImageUrl, previewText, formatIngredient } from "../../utils/recipeUtils";
+import { getRecipeImageUrl, previewText, formatIngredient, type Recipe } from "../../utils/recipeUtils";
 
-const props = defineProps({
-  recipe: {
-    type: Object,
-    required: true,
-  },
-  previewLength: {
-    type: Number,
-    default: 180,
-  },
-  maxIngredients: {
-    type: Number,
-    default: 4,
-  },
-});
+const props = withDefaults(
+  defineProps<{
+    recipe: Recipe;
+    previewLength?: number;
+    maxIngredients?: number;
+  }>(),
+  {
+    previewLength: 180,
+    maxIngredients: 4,
+  }
+);
 
 const imageUrl = computed(() => getRecipeImageUrl(props.recipe));
 const preview = computed(() => previewText(props.recipe.instructions, props.previewLength));
 
 const displayedIngredients = computed(() => {
+  if (!props.recipe.ingredients || !Array.isArray(props.recipe.ingredients)) {
+    return [];
+  }
   return props.recipe.ingredients
     .slice(0, props.maxIngredients)
     .map(formatIngredient);

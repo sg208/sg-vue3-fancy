@@ -17,13 +17,12 @@
   </div>
 </template>
 
-<script setup>
-defineProps({
-  recipe: {
-    type: Object,
-    required: true,
-  },
-});
+<script setup lang="ts">
+import type { Recipe } from "../../../utils/recipeUtils";
+
+defineProps<{
+  recipe: Recipe;
+}>();
 </script>
 
 

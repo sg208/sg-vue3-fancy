@@ -106,26 +106,27 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import { useQuery, useQueryClient } from "@tanstack/vue-query";
+import type { Recipe } from "../../utils/recipeUtils";
 
 const route = useRoute();
 const queryClient = useQueryClient();
-const recipeId = computed(() => route.params.id);
+const recipeId = computed(() => route.params.id as string);
 
 // Try to get recipe from cached "recipes" query first
-const getCachedRecipe = () => {
-  const cachedRecipes = queryClient.getQueryData(["recipes"]);
-  if (Array.isArray(cachedRecipes)) {
-    const found = cachedRecipes.find((r) => String(r.id) === String(recipeId.value));
+const getCachedRecipe = (): Recipe | undefined => {
+  const cachedData = queryClient.getQueryData<{ recipes: Recipe[] }>(["recipes"]);
+  if (cachedData && Array.isArray(cachedData.recipes)) {
+    const found = cachedData.recipes.find((r) => String(r.id) === String(recipeId.value));
     return found || undefined;
   }
   return undefined;
 };
 
-const { data: recipe, isLoading: loading } = useQuery({
+const { data: recipe, isLoading: loading } = useQuery<Recipe, Error>({
   queryKey: ["recipe", recipeId],
   queryFn: async () => {
     const res = await fetch(`https://dummyjson.com/recipes/${recipeId.value}`);
@@ -136,13 +137,13 @@ const { data: recipe, isLoading: loading } = useQuery({
   enabled: computed(() => !!recipeId.value),
 });
 
-function imageFor(r) {
+function imageFor(r: Recipe | null | undefined): string {
   if (r && r.image) return r.image;
   const q = encodeURIComponent(r?.name || "food");
   return `https://source.unsplash.com/800x600/?${q}`;
 }
 
-function formatInstructions(instructions) {
+function formatInstructions(instructions: string | string[] | null | undefined): string {
   if (Array.isArray(instructions)) {
     return instructions.join(" ");
   }
