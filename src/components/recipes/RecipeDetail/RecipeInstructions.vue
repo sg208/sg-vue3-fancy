@@ -5,16 +5,13 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from "vue";
-import { formatInstructions } from "../../../utils/recipeUtils";
+import { formatInstructions, type Recipe } from "../../../utils/recipeUtils";
 
-const props = defineProps({
-  recipe: {
-    type: Object,
-    required: true,
-  },
-});
+const props = defineProps<{
+  recipe: Recipe;
+}>();
 
 const formattedInstructions = computed(() => {
   return formatInstructions(props.recipe.instructions);

@@ -5,7 +5,7 @@
   </router-link>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const ShieldIcon = {
   template: `
     <svg class="w-6 h-6 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
