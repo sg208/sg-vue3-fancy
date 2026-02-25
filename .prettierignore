@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Build outputs and caches
+dist/
+.cache/
+.temp/
+.vite/
+
+# Lockfiles
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Coverage and tooling
+coverage/
+.ncu-config/
+
+# Minified / generated
+*.min.js
+*.min.css
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Auto-generated
+auto-imports.d.ts
+components.d.ts

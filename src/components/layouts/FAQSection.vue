@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from 'vue';
 
 const ChevronRightIcon = {
   template: `
@@ -52,7 +52,3 @@ const toggleQuestion = (index: number) => {
   // TODO: Implement accordion behavior
 };
 </script>
-
-
-
-
