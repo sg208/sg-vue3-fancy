@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.6] - 2026-02-26
+
+### Changed
+
+- Pin Node to LTS 24: `.node-version` and `.nvmrc` set to `24` (was 22.18.0)
+- Regenerated `package-lock.json` (Rollup, glob, and transitive dependency updates)
+
 ## [0.0.5] - 2026-02-26
 
 ### Removed
