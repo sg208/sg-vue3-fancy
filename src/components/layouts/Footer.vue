@@ -11,11 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import SocialLinks from "./Footer/SocialLinks.vue";
-import NavLinks from "./Footer/NavLinks.vue";
-import Copyright from "./Footer/Copyright.vue";
+import SocialLinks from './Footer/SocialLinks.vue';
+import NavLinks from './Footer/NavLinks.vue';
+import Copyright from './Footer/Copyright.vue';
 </script>
-
-
-
-

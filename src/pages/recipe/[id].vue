@@ -10,13 +10,33 @@
         </div>
       </div>
 
+      <div v-else-if="queryError" class="text-center py-20">
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">
+          Something went wrong
+        </h2>
+        <p class="text-gray-600 mb-6">
+          We couldn't load this recipe. Please try again.
+        </p>
+        <router-link
+          to="/"
+          class="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+        >
+          Back to Home
+        </router-link>
+      </div>
+
       <div v-else-if="recipe" class="space-y-8">
         <!-- Back Button -->
         <button
           class="flex items-center gap-2 text-gray-600 hover:text-orange-500 transition-colors mb-4"
           @click="$router.back()"
         >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -36,10 +56,14 @@
 
         <!-- Recipe Title -->
         <div class="text-center">
-          <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ recipe.name }}</h1>
+          <h1 class="text-4xl font-bold text-gray-900 mb-4">
+            {{ recipe.name }}
+          </h1>
 
           <!-- Recipe Meta Info -->
-          <div class="flex items-center justify-center gap-4 text-sm text-gray-600 mb-6">
+          <div
+            class="flex items-center justify-center gap-4 text-sm text-gray-600 mb-6"
+          >
             <span>{{ recipe.cuisine }}</span>
             <span class="text-gray-400">•</span>
             <span>{{ recipe.difficulty }}</span>
@@ -52,14 +76,20 @@
           </div>
 
           <!-- Instructions -->
-          <div class="prose prose-lg max-w-none text-left bg-gray-50 p-8 rounded-2xl mb-8">
+          <div
+            class="prose prose-lg max-w-none text-left bg-gray-50 p-8 rounded-2xl mb-8"
+          >
             <h3 class="text-2xl font-bold text-gray-900 mb-4">Instructions</h3>
-            <p class="text-gray-700 leading-relaxed">{{ formatInstructions(recipe.instructions) }}</p>
+            <p class="text-gray-700 leading-relaxed">
+              {{ formatInstructions(recipe.instructions) }}
+            </p>
           </div>
 
           <!-- Ingredients -->
           <div class="bg-white border-2 border-gray-100 rounded-2xl p-8">
-            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-left">Ingredients</h3>
+            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-left">
+              Ingredients
+            </h3>
             <ul class="space-y-3 grid grid-cols-1 md:grid-cols-2 gap-3">
               <li
                 v-for="ingredient in recipe.ingredients"
@@ -86,12 +116,19 @@
 
       <div v-else class="text-center py-20">
         <h2 class="text-2xl font-bold text-gray-900 mb-2">Recipe Not Found</h2>
-        <p class="text-gray-600 mb-6">The recipe you're looking for doesn't exist.</p>
+        <p class="text-gray-600 mb-6">
+          The recipe you're looking for doesn't exist.
+        </p>
         <router-link
           to="/"
           class="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
         >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -107,47 +144,47 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { useRoute } from "vue-router";
-import { useQuery, useQueryClient } from "@tanstack/vue-query";
-import type { Recipe } from "../../utils/recipeUtils";
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+import { useQueryClient } from '@tanstack/vue-query';
+import { useRecipe } from '../../composables/useRecipes';
+import {
+  getRecipeImageUrl,
+  formatInstructions as formatRecipeInstructions,
+  type Recipe,
+} from '../../utils/recipeUtils';
 
 const route = useRoute();
 const queryClient = useQueryClient();
 const recipeId = computed(() => route.params.id as string);
 
-// Try to get recipe from cached "recipes" query first
+// Use cached "recipes" list as initialData when available
 const getCachedRecipe = (): Recipe | undefined => {
-  const cachedData = queryClient.getQueryData<{ recipes: Recipe[] }>(["recipes"]);
+  const cachedData = queryClient.getQueryData<{ recipes: Recipe[] }>([
+    'recipes',
+  ]);
   if (cachedData && Array.isArray(cachedData.recipes)) {
-    const found = cachedData.recipes.find((r) => String(r.id) === String(recipeId.value));
-    return found || undefined;
+    const found = cachedData.recipes.find(
+      (r) => String(r.id) === String(recipeId.value)
+    );
+    return found ?? undefined;
   }
   return undefined;
 };
 
-const { data: recipe, isLoading: loading } = useQuery<Recipe, Error>({
-  queryKey: ["recipe", recipeId],
-  queryFn: async () => {
-    const res = await fetch(`https://dummyjson.com/recipes/${recipeId.value}`);
-    if (!res.ok) throw new Error("Failed to fetch recipe");
-    return await res.json();
-  },
-  initialData: getCachedRecipe,
-  enabled: computed(() => !!recipeId.value),
-});
+const {
+  recipe,
+  isLoading: loading,
+  error: queryError,
+} = useRecipe(recipeId, { initialData: getCachedRecipe });
 
 function imageFor(r: Recipe | null | undefined): string {
-  if (r && r.image) return r.image;
-  const q = encodeURIComponent(r?.name || "food");
-  return `https://source.unsplash.com/800x600/?${q}`;
+  return getRecipeImageUrl(r);
 }
 
-function formatInstructions(instructions: string | string[] | null | undefined): string {
-  if (Array.isArray(instructions)) {
-    return instructions.join(" ");
-  }
-  return String(instructions || "");
+function formatInstructions(
+  instructions: string | string[] | null | undefined
+): string {
+  return formatRecipeInstructions(instructions);
 }
 </script>
-

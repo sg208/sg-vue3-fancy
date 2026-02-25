@@ -24,7 +24,7 @@ export interface Recipe {
  */
 export function getRecipeImageUrl(recipe: Recipe | null | undefined): string {
   if (recipe?.image) return recipe.image;
-  const query = encodeURIComponent(recipe?.name || "food");
+  const query = encodeURIComponent(recipe?.name || 'food');
   return `https://source.unsplash.com/800x600/?${query}`;
 }
 
@@ -34,9 +34,14 @@ export function getRecipeImageUrl(recipe: Recipe | null | undefined): string {
  * @param maxLength - Maximum length
  * @returns Preview text
  */
-export function previewText(text: string | string[] | null | undefined, maxLength = 220): string {
-  const textStr = Array.isArray(text) ? text.join(" ") : String(text || "");
-  return textStr.length > maxLength ? textStr.slice(0, maxLength) + "…" : textStr;
+export function previewText(
+  text: string | string[] | null | undefined,
+  maxLength = 220
+): string {
+  const textStr = Array.isArray(text) ? text.join(' ') : String(text || '');
+  return textStr.length > maxLength
+    ? textStr.slice(0, maxLength) + '…'
+    : textStr;
 }
 
 /**
@@ -44,11 +49,13 @@ export function previewText(text: string | string[] | null | undefined, maxLengt
  * @param instructions - The instructions
  * @returns Formatted instructions
  */
-export function formatInstructions(instructions: string | string[] | null | undefined): string {
+export function formatInstructions(
+  instructions: string | string[] | null | undefined
+): string {
   if (Array.isArray(instructions)) {
-    return instructions.join(" ");
+    return instructions.join(' ');
   }
-  return String(instructions || "");
+  return String(instructions || '');
 }
 
 /**
@@ -84,12 +91,14 @@ export function getDisplayedRecipes(
  * @param ingredient - Full ingredient string
  * @returns Display name
  */
-export function formatIngredient(ingredient: string | null | undefined): string {
-  if (!ingredient || typeof ingredient !== "string") {
-    return ingredient || "";
+export function formatIngredient(
+  ingredient: string | null | undefined
+): string {
+  if (!ingredient || typeof ingredient !== 'string') {
+    return ingredient || '';
   }
 
-  const parts = ingredient.split(" ");
+  const parts = ingredient.split(' ');
   const firstPart = parts[0];
 
   // Only remove first part if it's a number or fraction (e.g., "2", "1/2", "0.5")
@@ -97,7 +106,7 @@ export function formatIngredient(ingredient: string | null | undefined): string 
   const isMeasurement = /^(\d+\/\d+|\d+(\.\d+)?)$/.test(firstPart);
 
   if (isMeasurement && parts.length > 1) {
-    return parts.slice(1).join(" ") || ingredient;
+    return parts.slice(1).join(' ') || ingredient;
   }
 
   return ingredient;
