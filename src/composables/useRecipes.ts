@@ -1,11 +1,11 @@
-import { computed, type Ref } from "vue";
-import { useQuery, type UseQueryOptions } from "@tanstack/vue-query";
+import { computed, type Ref } from 'vue';
+import { useQuery, type UseQueryOptions } from '@tanstack/vue-query';
+import type { Recipe } from '../utils/recipeUtils';
 
-const RECIPES_API_URL = "https://dummyjson.com/recipes";
-const RECIPE_API_URL = "https://dummyjson.com/recipes";
+const RECIPES_API_URL = 'https://dummyjson.com/recipes';
+const RECIPE_API_URL = 'https://dummyjson.com/recipes';
 
-// Re-export Recipe type from utils
-export type { Recipe } from "../utils/recipeUtils";
+export type { Recipe };
 
 interface RecipesResponse {
   recipes: Recipe[];
@@ -17,7 +17,7 @@ interface RecipesResponse {
  */
 export function useRecipes() {
   const { data, isLoading, error } = useQuery<RecipesResponse, Error>({
-    queryKey: ["recipes"],
+    queryKey: ['recipes'],
     queryFn: async () => {
       const res = await fetch(RECIPES_API_URL);
       const data = await res.json();
@@ -46,10 +46,10 @@ export function useRecipe(
   options?: Partial<UseQueryOptions<Recipe, Error>>
 ) {
   const { data, isLoading, error } = useQuery<Recipe, Error>({
-    queryKey: ["recipe", recipeId],
+    queryKey: ['recipe', recipeId],
     queryFn: async () => {
       const res = await fetch(`${RECIPE_API_URL}/${recipeId.value}`);
-      if (!res.ok) throw new Error("Failed to fetch recipe");
+      if (!res.ok) throw new Error('Failed to fetch recipe');
       return await res.json();
     },
     enabled: computed(() => !!recipeId.value),

@@ -10,7 +10,9 @@
         class="object-cover w-full h-56 transition-transform duration-300 group-hover:scale-105"
       />
       <div class="absolute top-4 left-4">
-        <span class="px-3 py-1 text-xs font-bold text-white bg-orange-500 rounded-full">
+        <span
+          class="px-3 py-1 text-xs font-bold text-white bg-orange-500 rounded-full"
+        >
           {{ recipe.prepTimeMinutes }} mins
         </span>
       </div>
@@ -25,9 +27,16 @@
       <p class="mb-4 text-sm text-gray-600 line-clamp-2">
         {{ preview }}
       </p>
-      <div class="flex items-center gap-1 text-sm font-semibold text-orange-500 transition-all group-hover:gap-2">
+      <div
+        class="flex items-center gap-1 text-sm font-semibold text-orange-500 transition-all group-hover:gap-2"
+      >
         View Recipe
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -41,8 +50,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { getRecipeImageUrl, previewText, type Recipe } from "../../utils/recipeUtils";
+import { computed } from 'vue';
+import {
+  getRecipeImageUrl,
+  previewText,
+  type Recipe,
+} from '../../utils/recipeUtils';
 
 const props = withDefaults(
   defineProps<{
@@ -55,7 +68,9 @@ const props = withDefaults(
 );
 
 const imageUrl = computed(() => getRecipeImageUrl(props.recipe));
-const preview = computed(() => previewText(props.recipe.instructions, props.previewLength));
+const preview = computed(() =>
+  previewText(props.recipe.instructions, props.previewLength)
+);
 </script>
 
 <style scoped>
@@ -66,7 +81,3 @@ const preview = computed(() => previewText(props.recipe.instructions, props.prev
   overflow: hidden;
 }
 </style>
-
-
-
-

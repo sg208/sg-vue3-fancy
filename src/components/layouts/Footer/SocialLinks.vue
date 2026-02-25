@@ -1,15 +1,31 @@
 <template>
   <div class="flex items-center gap-4">
-    <a href="#" class="text-orange-500 hover:text-orange-600" aria-label="Facebook">
+    <a
+      href="#"
+      class="text-orange-500 hover:text-orange-600"
+      aria-label="Facebook"
+    >
       <FacebookIcon />
     </a>
-    <a href="#" class="text-orange-500 hover:text-orange-600" aria-label="Instagram">
+    <a
+      href="#"
+      class="text-orange-500 hover:text-orange-600"
+      aria-label="Instagram"
+    >
       <InstagramIcon />
     </a>
-    <a href="#" class="text-orange-500 hover:text-orange-600" aria-label="YouTube">
+    <a
+      href="#"
+      class="text-orange-500 hover:text-orange-600"
+      aria-label="YouTube"
+    >
       <YouTubeIcon />
     </a>
-    <a href="#" class="text-orange-500 hover:text-orange-600" aria-label="LinkedIn">
+    <a
+      href="#"
+      class="text-orange-500 hover:text-orange-600"
+      aria-label="LinkedIn"
+    >
       <LinkedInIcon />
     </a>
   </div>
@@ -57,7 +73,3 @@ const LinkedInIcon = {
   `,
 };
 </script>
-
-
-
-

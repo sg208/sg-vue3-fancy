@@ -9,5 +9,5 @@
 </template>
 
 <script setup lang="ts">
-import AdvancedCard from "../components/AdvancedCard.vue";
+import AdvancedCard from '../components/AdvancedCard.vue';
 </script>
