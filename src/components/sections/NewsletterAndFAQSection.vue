@@ -10,18 +10,14 @@
 </template>
 
 <script setup lang="ts">
-import NewsletterSection from "../layouts/NewsletterSection.vue";
-import FAQSection from "../layouts/FAQSection.vue";
+import NewsletterSection from '../layouts/NewsletterSection.vue';
+import FAQSection from '../layouts/FAQSection.vue';
 
 const emit = defineEmits<{
   subscribe: [email: string];
 }>();
 
 const handleSubscribe = (email: string) => {
-  emit("subscribe", email);
+  emit('subscribe', email);
 };
 </script>
-
-
-
-

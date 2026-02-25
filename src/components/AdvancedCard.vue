@@ -14,9 +14,10 @@
 
     <template #content>
       <p class="text-slate-700 leading-relaxed text-lg">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error
-        repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa
-        ratione quam perferendis esse, cupiditate neque quas!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
+        consequuntur error repudiandae numquam deserunt quisquam repellat libero
+        asperiores earum nam nobis, culpa ratione quam perferendis esse,
+        cupiditate neque quas!
       </p>
     </template>
 
@@ -29,11 +30,11 @@
 </template>
 
 <script setup lang="ts">
-import Card from "primevue/card";
-import Button from "primevue/button";
+import Card from 'primevue/card';
+import Button from 'primevue/button';
 
 const imageSrc =
-  "https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?q=80&w=1600&auto=format&fit=crop";
+  'https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?q=80&w=1600&auto=format&fit=crop';
 </script>
 
 <style scoped></style>

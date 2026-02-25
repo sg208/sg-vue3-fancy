@@ -1,10 +1,13 @@
 <template>
   <div>
     <h2 class="mb-2 text-3xl font-bold text-gray-900">Ready to cook</h2>
-    <h2 class="mb-4 font-serif text-3xl italic font-bold text-gray-900">delicious</h2>
+    <h2 class="mb-4 font-serif text-3xl italic font-bold text-gray-900">
+      delicious
+    </h2>
     <h2 class="mb-6 text-3xl font-bold text-gray-900">meals?</h2>
     <p class="mb-6 text-gray-600">
-      Subscribe to our newsletter and get weekly recipe inspiration delivered to your inbox.
+      Subscribe to our newsletter and get weekly recipe inspiration delivered to
+      your inbox.
     </p>
     <div class="flex gap-2">
       <input
@@ -24,21 +27,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from 'vue';
 
-const email = ref("");
+const email = ref('');
 const emit = defineEmits<{
   subscribe: [email: string];
 }>();
 
 const handleSubscribe = () => {
   if (email.value) {
-    emit("subscribe", email.value);
-    email.value = "";
+    emit('subscribe', email.value);
+    email.value = '';
   }
 };
 </script>
-
-
-
-

@@ -1,16 +1,28 @@
 <template>
   <div class="max-w-5xl mx-auto">
-    <div class="flex flex-col overflow-hidden bg-white shadow-lg rounded-3xl md:flex-row">
+    <div
+      class="flex flex-col overflow-hidden bg-white shadow-lg rounded-3xl md:flex-row"
+    >
       <div class="relative md:w-1/2">
-        <img :src="imageUrl" :alt="recipe.name" class="w-full h-full object-cover min-h-[400px]" />
+        <img
+          :src="imageUrl"
+          :alt="recipe.name"
+          class="w-full h-full object-cover min-h-[400px]"
+        />
       </div>
       <div class="flex flex-col justify-between p-8 md:w-1/2 md:p-10">
         <div>
           <div class="flex items-center gap-3 mb-4">
-            <span class="text-sm font-medium text-orange-500">{{ recipe.prepTimeMinutes }} mins</span>
-            <span class="text-sm font-medium text-green-600">{{ recipe.difficulty }}</span>
+            <span class="text-sm font-medium text-orange-500"
+              >{{ recipe.prepTimeMinutes }} mins</span
+            >
+            <span class="text-sm font-medium text-green-600">{{
+              recipe.difficulty
+            }}</span>
           </div>
-          <h2 class="mb-4 text-3xl font-bold text-gray-900">{{ recipe.name }}</h2>
+          <h2 class="mb-4 text-3xl font-bold text-gray-900">
+            {{ recipe.name }}
+          </h2>
           <p class="mb-6 leading-relaxed text-gray-600">
             {{ preview }}
           </p>
@@ -39,8 +51,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { getRecipeImageUrl, previewText, formatIngredient, type Recipe } from "../../utils/recipeUtils";
+import { computed } from 'vue';
+import {
+  getRecipeImageUrl,
+  previewText,
+  formatIngredient,
+  type Recipe,
+} from '../../utils/recipeUtils';
 
 const props = withDefaults(
   defineProps<{
@@ -55,7 +72,9 @@ const props = withDefaults(
 );
 
 const imageUrl = computed(() => getRecipeImageUrl(props.recipe));
-const preview = computed(() => previewText(props.recipe.instructions, props.previewLength));
+const preview = computed(() =>
+  previewText(props.recipe.instructions, props.previewLength)
+);
 
 const displayedIngredients = computed(() => {
   if (!props.recipe.ingredients || !Array.isArray(props.recipe.ingredients)) {
@@ -66,7 +85,3 @@ const displayedIngredients = computed(() => {
     .map(formatIngredient);
 });
 </script>
-
-
-
-
