@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 
 // Plugins
 import vue from '@vitejs/plugin-vue';
+import tailwindcss from '@tailwindcss/vite';
 
 // https://github.com/hannoeru/vite-plugin-pages
 import Pages from 'vite-plugin-pages';
@@ -18,6 +19,7 @@ import { PrimeVueResolver } from 'unplugin-vue-components/resolvers';
 export default defineConfig({
   plugins: [
     vue(),
+    tailwindcss(),
     Pages(),
     Components({
       resolvers: [PrimeVueResolver()],

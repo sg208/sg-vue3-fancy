@@ -28,6 +28,10 @@ module.exports = defineConfig([
         extraFileExtensions: ['.vue'],
       },
     },
+    rules: {
+      // ESLint 10 core rule cannot see <script setup> bindings used in the template.
+      'no-useless-assignment': 'off',
+    },
   },
   { rules: configPrettier.rules },
   {

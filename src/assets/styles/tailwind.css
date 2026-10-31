@@ -1,8 +1,23 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss' source(none);
+@source '../../../index.html';
+@source '../../**/*.vue';
 
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+/*
+  Tailwind v4 changed the default border color to `currentcolor`.
+  Keep the v3 look (gray-200) until every border has an explicit color.
+*/
 @layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
   /* Force light background globally to avoid unexpected dark surfaces */
   html,
   body,
@@ -11,10 +26,14 @@
   }
 }
 
+/*
+  PrimeVue renders these classes at runtime, so they are plain component
+  rules (not @utility, which only emits classes found in scanned sources).
+*/
 @layer components {
   /* Ensure PrimeVue Card has accessible contrast */
   .p-card {
-    @apply text-gray-900 bg-white border border-gray-200 shadow-sm;
+    @apply text-gray-900 bg-white border border-gray-200 shadow-xs;
   }
   .p-card .p-card-title {
     @apply text-gray-900;

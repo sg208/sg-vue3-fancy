@@ -5,8 +5,8 @@
       <div v-if="loading" class="space-y-8">
         <div class="h-96 bg-gray-200 rounded-3xl animate-pulse"></div>
         <div class="space-y-4">
-          <div class="h-8 bg-gray-200 rounded w-2/3 animate-pulse"></div>
-          <div class="h-32 bg-gray-200 rounded animate-pulse"></div>
+          <div class="h-8 bg-gray-200 rounded-sm w-2/3 animate-pulse"></div>
+          <div class="h-32 bg-gray-200 rounded-sm animate-pulse"></div>
         </div>
       </div>
 
@@ -97,7 +97,7 @@
                 class="flex items-start gap-3"
               >
                 <svg
-                  class="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5"
+                  class="w-5 h-5 text-orange-500 shrink-0 mt-0.5"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >

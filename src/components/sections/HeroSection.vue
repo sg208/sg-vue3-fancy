@@ -1,5 +1,5 @@
 <template>
-  <section class="py-16 bg-gradient-to-b from-orange-50 to-white">
+  <section class="py-16 bg-linear-to-b from-orange-50 to-white">
     <div class="container px-4 mx-auto">
       <div class="mb-12 text-center">
         <p
