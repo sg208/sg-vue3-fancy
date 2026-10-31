@@ -19,7 +19,9 @@
     "format:check": "prettier . --check",
     "format": "prettier . --write",
     "list": "pnpm run lint:check && pnpm run format:check",
-    "fix": "pnpm run lint && pnpm run format"
+    "fix": "pnpm run lint && pnpm run format",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@primeuix/themes": "^3.1.0",
@@ -39,10 +41,12 @@
     "@types/node": "^24.19.2",
     "@typescript-eslint/parser": "^8.72.1",
     "@vitejs/plugin-vue": "^6.0.10",
+    "@vue/test-utils": "^2.5.1",
     "eslint": "^10.14.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-vue": "^10.12.0",
     "globals": "^17.13.0",
+    "happy-dom": "^21.0.4",
     "prettier": "3.9.10",
     "sass": "^1.107.1",
     "tailwindcss": "^4.3.3",
@@ -52,6 +56,7 @@
     "vite": "^8.3.5",
     "vite-auto-import-resolvers": "^3.2.1",
     "vite-plugin-pages": "^0.33.3",
+    "vitest": "^5.0.5",
     "vue-eslint-parser": "^10.4.1",
     "vue-tsc": "^3.3.14"
   },
