@@ -14,7 +14,7 @@
         v-model="email"
         type="email"
         placeholder="Enter your email"
-        class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+        class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-orange-500"
       />
       <button
         class="px-6 py-3 font-semibold text-white transition-colors bg-orange-500 rounded-lg hover:bg-orange-600 whitespace-nowrap"

@@ -1,5 +1,5 @@
 <template>
-  <Card class="rounded-2xl border shadow-sm overflow-hidden">
+  <Card class="rounded-2xl border shadow-xs overflow-hidden">
     <template #header>
       <img :src="imageSrc" alt="Card header" class="w-full h-56 object-cover" />
     </template>
