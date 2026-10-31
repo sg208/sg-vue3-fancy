@@ -33,4 +33,11 @@ https://sg-vue3-fancy-engg-me.netlify.app
 - Node version: `>=22.12.0`
 - Target: `Single Page App`
 - Public folder: `dist`
-- Build command: `npm run build`
+- Package manager: `pnpm` (`packageManager` in `package.json`; run `corepack enable`)
+- Install: `pnpm install`
+- Build command: `pnpm build`
+- Test: `pnpm test`
+
+## License
+
+[MIT](./LICENSE) © 2026 Syailendra Ginting
