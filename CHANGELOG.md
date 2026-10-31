@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Vitest suite (`pnpm test`) for recipe utils and `RecipeCard`
+- MIT `LICENSE`; `license` and `author` in `package.json`
+
+### Changed
+
+- Package manager: npm to pnpm (`pnpm-lock.yaml`, `packageManager`)
+- Vite 8, Vue Router 5, PrimeVue 5 (`@primeuix/themes`), PrimeIcons 8, Vue Query Devtools 6, ESLint 10, TypeScript 6, unplugin-auto-import 21, unplugin-vue-components 32
+- Tailwind CSS 3 to 4 via `@tailwindcss/vite`; config moved into `src/assets/styles/tailwind.css`
+
+### Removed
+
+- `vite-plugin-eslint`, `@eslint/eslintrc`, `.eslintrc.cjs`, `postcss.config.cjs`, `tailwind.config.js`, `autoprefixer`, `@tailwindcss/aspect-ratio`
+
+### Security
+
+- Fixed all high `npm audit` advisories (vite, vue, postcss and transitive)
+
 ## [0.0.6] - 2026-02-26
 
 ### Changed
