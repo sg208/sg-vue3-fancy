@@ -34,35 +34,6 @@ coverage/
 
 # TypeScript
 *.tsbuildinfo
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@sg208 
-sg208
-/
-sg-nuxt-bridge
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-sg-nuxt-bridge/.gitignore
-@sg208
-sg208 Initial upload
-Latest commit 29b7faf 4 days ago
- History
- 1 contributor
-99 lines (70 sloc)  1.35 KB
-   
 # Created by .ignore support plugin (hsz.mobi)
 ### Node template
 # Logs
