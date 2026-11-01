@@ -20,6 +20,7 @@ declare module 'vue' {
     FeaturedRecipeSkeleton: typeof import('./src/components/recipes/FeaturedRecipeSkeleton.vue')['default']
     Footer: typeof import('./src/components/layouts/Footer.vue')['default']
     HeroSection: typeof import('./src/components/sections/HeroSection.vue')['default']
+    LegalPage: typeof import('./src/components/layouts/LegalPage.vue')['default']
     MinuteBand: typeof import('./src/components/recipes/MinuteBand.vue')['default']
     Nav: typeof import('./src/components/layouts/Nav.vue')['default']
     NavLinks: typeof import('./src/components/layouts/Footer/NavLinks.vue')['default']
