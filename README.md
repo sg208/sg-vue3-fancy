@@ -1,47 +1,51 @@
 # sg-vue3-fancy
 
-This is a simple template utilizing Vue 3 and couple of simple packages to make you life a bit easier as a front end developer. The stacks are below and I'm adding more to the list.
+A Vue 3 starter template with a small demo app on top. Live at https://sg-vue3-fancy.engg.app
 
-The demo app is **The Minute Book**, a recipe browser that draws each recipe's prep and cook time as five-minute bars and filters the list by the time you have. It has light and dark themes and follows your system setting.
+The demo is **The Minute Book**, a recipe browser. It draws each recipe's prep and cook time as five-minute bars and filters the list by how much time you have. Recipes come from the public [DummyJSON](https://dummyjson.com/docs/recipes) API. It has light and dark themes and follows your system setting.
 
-## Stacks
+## Stack
 
-- Vue 3
-- [Vite (bundler)](https://vitejs.dev/)
-- [File based routing](https://github.com/hannoeru/vite-plugin-pages)
-- [Auto import components](https://github.com/antfu/unplugin-vue-components)
-- [Auto import composables and modules](https://github.com/antfu/unplugin-auto-import)
-  - Resolver https://github.com/dishait/vite-auto-import-resolvers/blob/main/README_EN.md
-- [Tailwind CSS](https://tailwindcss.com/)
-- [TanStack Vue Query (data fetching & caching)](https://tanstack.com/query/latest/docs/vue/overview)
-  - Configured with 5-minute cache (`staleTime`)
-  - Includes smart cache lookup (e.g., recipe details from cached recipes list)
-- [TanStack Vue Query Devtools](https://tanstack.com/query/latest/docs/vue/devtools) (development only)
-- [PrimeVue 4 (UI component library, MIT)](https://primevue.org/)
-  - Themed through a design-token preset in `src/theme/preset.ts`
-- Deployed as a Cloudflare Worker (static assets); `not_found_handling: single-page-application` in `wrangler.jsonc` serves `index.html` for every route
-- i18n ... Coming soon!
-- Meta tags ... Coming soon!
-- Layouts ... Coming soon!
-- [Sg208 Vue Component Library](https://www.npmjs.com/package/sg208-button?activeTab=readme)
+- Vue 3 with [Vite](https://vite.dev/)
+- [File-based routing](https://github.com/hannoeru/vite-plugin-pages): every file in `src/pages/` is a route
+- Auto-imported [components](https://github.com/antfu/unplugin-vue-components) and [composables](https://github.com/antfu/unplugin-auto-import) (with [vite-auto-import-resolvers](https://github.com/dishait/vite-auto-import-resolvers/blob/main/README_EN.md))
+- [Tailwind CSS 4](https://tailwindcss.com/)
+- [PrimeVue 4](https://primevue.org/), themed through a design-token preset in `src/theme/preset.ts`
+- [TanStack Vue Query](https://tanstack.com/query/latest/docs/vue/overview) for fetching and caching. Data stays fresh for 5 minutes, and a recipe page reuses the recipe from the cached list when it can. The [devtools](https://tanstack.com/query/latest/docs/vue/devtools) load in development only.
+- [sg208-button](https://www.npmjs.com/package/sg208-button), the Sg208 Vue component library
+- Vitest and Vue Test Utils for unit tests
 
-## Demo
+Still to come: i18n, meta tags and layouts.
 
-This project is deployed as a Cloudflare Worker on the sg208 account.
+## Run it locally
 
-https://sg-vue3-fancy.engg.app
+You need Node `>=22.12.0` (`.nvmrc` pins 24) and pnpm. `corepack enable` picks up the pnpm version from `package.json`.
 
-`pnpm run deploy` builds and runs `wrangler deploy`; it needs `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in the environment.
+```bash
+pnpm install
+pnpm dev
+```
 
-## Couple of things
+## Test and check
 
-- Node version: `>=22.12.0`
-- Target: `Single Page App`
-- Public folder: `dist`
-- Package manager: `pnpm` (`packageManager` in `package.json`; run `corepack enable`)
-- Install: `pnpm install`
-- Build command: `pnpm build`
-- Test: `pnpm test`
+```bash
+pnpm test          # Vitest
+pnpm type-check    # vue-tsc
+pnpm lint:check    # ESLint
+pnpm format:check  # Prettier
+```
+
+## Build and deploy
+
+`pnpm build` writes a single-page app to `dist/`.
+
+The site runs as a Cloudflare Worker that serves `dist/` as static assets. `wrangler.jsonc` sets `not_found_handling: single-page-application`, so every route gets `index.html`, and binds the custom domain `sg-vue3-fancy.engg.app`.
+
+```bash
+pnpm run deploy
+```
+
+This builds and runs `wrangler deploy`. It needs `wrangler` 4 installed globally and `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` set in your environment.
 
 ## License
 
