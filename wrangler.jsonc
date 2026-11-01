@@ -1,0 +1,11 @@
+{
+  "name": "sg-vue3-fancy",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "dist",
+    "not_found_handling": "single-page-application",
+  },
+  "routes": [{ "pattern": "sg-vue3-fancy.engg.app", "custom_domain": true }],
+  "workers_dev": false,
+  "preview_urls": false,
+}

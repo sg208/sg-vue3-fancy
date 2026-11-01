@@ -130,3 +130,6 @@ sw.*
 
 # archives files, not being used
 /.archives
+
+# wrangler
+.wrangler/
