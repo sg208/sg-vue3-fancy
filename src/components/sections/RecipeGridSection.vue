@@ -15,11 +15,11 @@
       {{ summary }}
     </p>
 
-    <ul v-if="loading" class="mt-4" aria-label="Loading recipes">
+    <ul v-if="loading" class="mt-4" aria-hidden="true">
       <li v-for="n in 6" :key="n"><RecipeCardSkeleton /></li>
     </ul>
 
-    <ul v-else-if="visibleRecipes.length" class="mt-4">
+    <ul v-else-if="visibleRecipes.length" ref="listRef" class="mt-4">
       <li
         v-for="(recipe, i) in visibleRecipes"
         :key="recipe.id"
@@ -38,7 +38,7 @@
       v-if="hiddenCount > 0"
       type="button"
       class="btn btn-quiet mt-8 w-full"
-      @click="isShowingAll = true"
+      @click="handleShowAll"
     >
       Show {{ hiddenCount }} more
     </button>
@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 import RecipeCard from '../recipes/RecipeCard.vue';
 import RecipeCardSkeleton from '../recipes/RecipeCardSkeleton.vue';
 import TimeFilter from '../recipes/TimeFilter.vue';
@@ -62,6 +62,7 @@ const emit = defineEmits<{ highlight: [recipe: Recipe] }>();
 const INITIAL_ROWS = 12;
 const maxMinutes = ref(0);
 const isShowingAll = ref(false);
+const listRef = ref<HTMLUListElement | null>(null);
 
 const matchingRecipes = computed(() =>
   filterByMinutes(props.recipes ?? [], maxMinutes.value || null)
@@ -74,6 +75,12 @@ const visibleRecipes = computed(() =>
 const hiddenCount = computed(
   () => matchingRecipes.value.length - visibleRecipes.value.length
 );
+// The button disappears once clicked, so move focus to the first new row.
+const handleShowAll = async () => {
+  isShowingAll.value = true;
+  await nextTick();
+  listRef.value?.querySelectorAll('a')[INITIAL_ROWS]?.focus();
+};
 const summary = computed(() => {
   if (props.loading) return 'Loading the book…';
   const count = matchingRecipes.value.length;

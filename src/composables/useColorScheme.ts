@@ -28,7 +28,7 @@ export const initColorScheme = () => {
 
   window
     .matchMedia?.('(prefers-color-scheme: dark)')
-    .addEventListener('change', (event) => {
+    ?.addEventListener('change', (event) => {
       if (!readStoredScheme()) applyScheme(event.matches);
     });
 };

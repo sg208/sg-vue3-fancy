@@ -7,7 +7,7 @@
   >
     <img
       :src="imageUrl"
-      :alt="recipe.name"
+      alt=""
       width="72"
       height="72"
       loading="lazy"

@@ -74,9 +74,12 @@ const toggleScheme = (mode: 'light' | 'dark') => {
       checkedBorderColor: ground,
       color: mode === 'light' ? '{surface.700}' : '{surface.300}',
       hoverColor: '{text.color}',
-      checkedColor: '{surface.950}',
+      // Light: ink fill, since brass on the ground is only ~1.6:1.
+      checkedColor: mode === 'light' ? '{surface.0}' : '{surface.950}',
     },
-    content: { checkedBackground: brass[mode] },
+    content: {
+      checkedBackground: mode === 'light' ? '{surface.950}' : brass.dark,
+    },
   };
 };
 
@@ -128,7 +131,8 @@ export const minuteBookPreset = definePreset(Aura, {
         padding: '0.75rem 1.25rem 0.75rem 0',
       },
       tabpanel: { background: 'transparent', padding: '1.25rem 0 0 0' },
-      activeBar: { height: '3px', background: brass.light },
+      // Cook brass: 3:1+ against paper in both schemes, unlike light brass.
+      activeBar: { height: '3px', background: '#7a700b' },
     },
     card: {
       root: { shadow: 'none' },

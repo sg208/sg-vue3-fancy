@@ -20,7 +20,6 @@
     <figcaption
       v-if="recipe"
       class="flex items-baseline justify-between gap-4 bg-panel px-4 py-3 text-small"
-      aria-live="polite"
     >
       <span class="truncate">{{ recipe.name }}</span>
       <span class="whitespace-nowrap tabular-nums text-muted">

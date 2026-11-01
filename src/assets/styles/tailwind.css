@@ -39,7 +39,7 @@
     --color-ink: #e8e8e3;
     --color-muted: #a9a8a0;
     --color-brass: #cfc22a;
-    --color-cook: #cfc22a;
+    --color-cook: #8f8410;
   }
 
   *,
@@ -147,8 +147,8 @@
 }
 
 @keyframes rise {
+  /* Transform only: fading text would dip below 4.5:1 mid-animation. */
   from {
-    opacity: 0;
     transform: translateY(20px);
   }
 }
@@ -159,6 +159,7 @@
   ::after {
     animation-duration: 0.01ms !important;
     animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
