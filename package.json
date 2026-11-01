@@ -21,7 +21,8 @@
     "list": "pnpm run lint:check && pnpm run format:check",
     "fix": "pnpm run lint && pnpm run format",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "deploy": "pnpm build && wrangler deploy"
   },
   "dependencies": {
     "@primeuix/themes": "^2.0.3",

@@ -19,7 +19,7 @@ The demo app is **The Minute Book**, a recipe browser that draws each recipe's p
 - [TanStack Vue Query Devtools](https://tanstack.com/query/latest/docs/vue/devtools) (development only)
 - [PrimeVue 4 (UI component library, MIT)](https://primevue.org/)
   - Themed through a design-token preset in `src/theme/preset.ts`
-- Deployed to Netlify (`public/_redirects` serves `index.html` for every route)
+- Deployed as a Cloudflare Worker (static assets); `not_found_handling: single-page-application` in `wrangler.jsonc` serves `index.html` for every route
 - i18n ... Coming soon!
 - Meta tags ... Coming soon!
 - Layouts ... Coming soon!
@@ -27,9 +27,11 @@ The demo app is **The Minute Book**, a recipe browser that draws each recipe's p
 
 ## Demo
 
-This project is deployed to Netlify.
+This project is deployed as a Cloudflare Worker on the sg208 account.
 
-https://sg-vue3-fancy-engg-me.netlify.app
+https://sg-vue3-fancy.engg.app
+
+`pnpm deploy` builds and runs `wrangler deploy`; it needs `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in the environment.
 
 ## Couple of things
 
