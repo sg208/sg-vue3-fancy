@@ -3,17 +3,30 @@ import App from './App.vue';
 import router from './router';
 import './assets/styles/tailwind.css';
 import PrimeVue from 'primevue/config';
-import Aura from '@primeuix/themes/aura';
 import 'primeicons/primeicons.css';
 import { VueQueryPlugin } from '@tanstack/vue-query';
+import { minuteBookPreset } from './theme/preset';
+import {
+  DARK_MODE_SELECTOR,
+  initColorScheme,
+} from './composables/useColorScheme';
+
+initColorScheme();
 
 const app = createApp(App);
 
 // Add router
 app.use(router);
 
-// Register PrimeVue with options explicitly
-app.use(PrimeVue, { theme: { preset: Aura } });
+// PrimeVue themed through its design tokens (src/theme/preset.ts)
+app.use(PrimeVue, {
+  theme: {
+    preset: minuteBookPreset,
+    options: { darkModeSelector: DARK_MODE_SELECTOR },
+  },
+  // PrimeUI licence key, read from the build environment when one is set.
+  license: import.meta.env.VITE_PRIMEUI_LICENSE,
+});
 
 // Register Vue Query with cache configuration
 app.use(VueQueryPlugin, {

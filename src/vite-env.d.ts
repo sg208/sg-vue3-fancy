@@ -5,3 +5,7 @@ declare module '~pages' {
   const routes: RouteRecordRaw[];
   export default routes;
 }
+
+interface ImportMetaEnv {
+  readonly VITE_PRIMEUI_LICENSE?: string;
+}
