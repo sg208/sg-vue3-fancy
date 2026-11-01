@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-11-01
+
+### Added
+
+- **Cloudflare Workers hosting**: the demo is live at https://sg-vue3-fancy.engg.app. `wrangler.jsonc` serves the built app with `not_found_handling: single-page-application`, so deep links load the app. `pnpm run deploy` builds and deploys.
+
+### Removed
+
+- **Netlify `public/_redirects`**: Cloudflare rejected its catch-all rule as an infinite redirect loop. The Workers SPA fallback replaces it.
+
 ## [0.2.0] - 2026-11-01
 
 ### Added
