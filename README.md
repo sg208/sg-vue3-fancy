@@ -47,7 +47,7 @@ The site runs as a Cloudflare Worker that serves `dist/` as static assets. `wran
 pnpm run deploy
 ```
 
-This builds and runs `wrangler deploy`. It needs `wrangler` 4 installed globally and `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` set in your environment.
+This builds and runs `wrangler deploy`. Wrangler 4 is a dev dependency, so you only need `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` set in your environment.
 
 ## License
 
