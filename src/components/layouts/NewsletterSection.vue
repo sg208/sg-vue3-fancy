@@ -27,7 +27,7 @@
           >Enter an email address like name@example.com.</template
         >
         <template v-else-if="isSubscribed"
-          >Thank you, you are on the list.</template
+          >Thanks. This form is a demo, so nothing was sent.</template
         >
       </p>
     </form>

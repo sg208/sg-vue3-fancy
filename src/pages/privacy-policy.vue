@@ -2,7 +2,9 @@
   <LegalPage title="Privacy" updated="2026-11-01">
     <h2>What this site collects</h2>
     <p>
-      Nothing about you. There are no accounts, no analytics and no cookies.
+      The site itself collects nothing about you. There are no accounts, no
+      analytics and no cookies. The services your browser contacts to load the
+      site are listed below.
     </p>
     <p>
       If you press the theme button, your choice of light or dark is saved in
@@ -25,7 +27,8 @@
       <li>
         Cloudflare, which hosts and serves this site. Like any web host it may
         keep standard request logs, such as IP address, user agent and the page
-        requested.
+        requested. It also asks your browser to send it reports of network
+        errors, if your browser supports them.
       </li>
       <li>
         <code>dummyjson.com</code> for the recipe data, and

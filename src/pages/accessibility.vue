@@ -21,8 +21,9 @@
       </li>
       <li>Focused links and buttons show a visible outline.</li>
       <li>
-        The light and dark themes follow your system setting, and the theme
-        button tells assistive technology whether dark mode is on.
+        The light and dark themes follow your system setting until you pick one
+        with the theme button, and the theme button tells assistive technology
+        whether dark mode is on.
       </li>
       <li>
         Animations stop when your system asks for reduced motion. They move text
