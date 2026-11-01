@@ -24,7 +24,7 @@ PURPOSE: architecture, data flow and key decisions for sg-vue3-fancy. Reader = a
 
 ## Decisions
 
-- Hosting = Cloudflare Worker at `https://sg-vue3-fancy.engg.app`; deploy = `pnpm run deploy` (build + global `wrangler` 4; env `CLOUDFLARE_API_TOKEN` · `CLOUDFLARE_ACCOUNT_ID`). SOURCE: commit `e9196f6`. Vercel · Netlify · Railway · Cloudflare Pages · engg.me retired.
+- Hosting = Cloudflare Worker at `https://sg-vue3-fancy.engg.app`; deploy = `pnpm run deploy` (build + `wrangler` v4 devDependency; env `CLOUDFLARE_API_TOKEN` · `CLOUDFLARE_ACCOUNT_ID`). SOURCE: commit `e9196f6`. Vercel · Netlify · Railway · Cloudflare Pages · engg.me retired.
 - `not_found_handling: single-page-application` (`wrangler.jsonc:6`). WHY: client-side routes need `index.html` on deep links.
 - Tailwind `source(none)` (`src/assets/styles/tailwind.css:1`). WHY: auto-detection scanned docs and tripled CSS size.
 - PrimeVue overrides in `@layer components` (`src/assets/styles/tailwind.css:90`), not `@utility`. WHY: PrimeVue classes are runtime-only; `@utility` output gets dropped.
