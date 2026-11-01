@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-01
+
+### Added
+
+- **Accessibility, privacy and terms pages**: `/accessibility`, `/privacy-policy` and `/terms` say what the site does, which services your browser contacts and how to report a problem. The footer links to all three and to the source on GitHub.
+- **Local `wrangler`**: `wrangler` is now a dev dependency, so `pnpm run deploy` no longer relies on a global install.
+
+### Changed
+
+- **Newsletter demo message**: after a valid address, the form now says it is a demo and nothing was sent, instead of claiming you joined a list.
+
 ## [0.2.1] - 2026-11-01
 
 ### Added
