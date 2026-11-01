@@ -4,6 +4,8 @@ A Vue 3 starter template with a small demo app on top. Live at https://sg-vue3-f
 
 The demo is **The Minute Book**, a recipe browser. It draws each recipe's prep and cook time as five-minute bars and filters the list by how much time you have. Recipes come from the public [DummyJSON](https://dummyjson.com/docs/recipes) API. It has light and dark themes and follows your system setting.
 
+The footer links to Accessibility, Privacy and Terms pages and to this repo on GitHub.
+
 ## Stack
 
 - Vue 3 with [Vite](https://vite.dev/)
