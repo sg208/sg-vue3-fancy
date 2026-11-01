@@ -30,7 +30,7 @@ describe('RecipeCard', () => {
     expect(wrapper.find('h3').text()).toBe('Pad Thai');
     expect(wrapper.find('img').attributes()).toMatchObject({
       src: 'pad-thai.jpg',
-      alt: 'Pad Thai',
+      alt: '', // decorative: the link is already named by the heading
     });
     expect(wrapper.text()).toContain('20 mins');
     expect(wrapper.text()).toContain('Thai');

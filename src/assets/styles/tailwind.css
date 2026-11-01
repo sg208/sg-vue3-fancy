@@ -5,48 +5,162 @@
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 
+/* Dark mode follows the `.app-dark` class set by useColorScheme. */
+@custom-variant dark (&:where(.app-dark, .app-dark *));
+
 /*
-  Tailwind v4 changed the default border color to `currentcolor`.
-  Keep the v3 look (gray-200) until every border has an explicit color.
+  Tokens. Light values live in @theme; the dark scheme (and any section
+  printed in reverse) redefines them below. Plain overrides rather than
+  light-dark(), which the CSS minifier lowers to values fixed at :root.
 */
+@theme {
+  --font-serif: 'Boska', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --color-paper: #e8e8e3;
+  --color-panel: #dcdcd6;
+  --color-ink: #181715;
+  --color-muted: #55544f;
+  --color-brass: #bfb21a;
+  --color-cook: #7a700b;
+  --text-small: clamp(0.9375rem, 0.9rem + 0.1vw, 1rem);
+  --text-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --text-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --text-head: clamp(2rem, 1.3rem + 3.2vw, 4rem);
+}
+
 @layer base {
+  :root {
+    color-scheme: light;
+  }
+  :root.app-dark,
+  .field-ink {
+    color-scheme: dark;
+    --color-paper: #181715;
+    --color-panel: #22211e;
+    --color-ink: #e8e8e3;
+    --color-muted: #a9a8a0;
+    --color-brass: #cfc22a;
+    --color-cook: #8f8410;
+  }
+
   *,
   ::after,
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
+    border-color: var(--color-panel);
   }
 
-  /* Force light background globally to avoid unexpected dark surfaces */
-  html,
-  body,
-  #app {
-    @apply text-gray-900 bg-white;
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-serif);
+    font-size: var(--text-body);
+    line-height: 1.5;
+    letter-spacing: 0.005em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-variant-numeric: lining-nums;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--color-brass);
+    color: #181715;
   }
 }
 
-/*
-  PrimeVue renders these classes at runtime, so they are plain component
-  rules (not @utility, which only emits classes found in scanned sources).
-*/
 @layer components {
-  /* Ensure PrimeVue Card has accessible contrast */
-  .p-card {
-    @apply text-gray-900 bg-white border border-gray-200 shadow-xs;
+  /* One button shape for the whole site: square, flat, filled. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2px;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-weight: 500;
+    text-decoration: none;
+    transition:
+      transform 0.18s ease,
+      background-color 0.18s ease;
   }
-  .p-card .p-card-title {
-    @apply text-gray-900;
+  .btn:hover {
+    background: color-mix(in srgb, var(--color-ink) 86%, var(--color-paper));
   }
-  .p-card .p-card-subtitle {
-    @apply text-gray-600;
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn-quiet {
+    background: var(--color-panel);
+    color: var(--color-ink);
+  }
+  .btn-quiet:hover {
+    background: color-mix(in srgb, var(--color-panel) 80%, var(--color-ink));
   }
 
-  /* Ensure PrimeVue Dialog uses light surface */
-  .p-dialog,
-  .p-dialog .p-dialog-header,
-  .p-dialog .p-dialog-content,
-  .p-dialog .p-dialog-footer {
-    @apply text-gray-900 bg-white;
+  .link {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: text-decoration-color 0.18s ease;
+  }
+  .link:hover {
+    text-decoration-color: var(--color-brass);
+    text-decoration-thickness: 2px;
+  }
+
+  /* A whole section printed in reverse: paper type on ink. */
+  .field-ink {
+    background: #181715;
+    color: var(--color-ink);
+  }
+  .app-dark .field-ink {
+    background: #22211e;
+  }
+
+  .reveal {
+    animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 70ms);
+  }
+}
+
+@keyframes rise {
+  /* Transform only: fading text would dip below 4.5:1 mid-animation. */
+  from {
+    transform: translateY(20px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

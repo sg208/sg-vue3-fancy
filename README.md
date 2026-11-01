@@ -2,6 +2,8 @@
 
 This is a simple template utilizing Vue 3 and couple of simple packages to make you life a bit easier as a front end developer. The stacks are below and I'm adding more to the list.
 
+The demo app is **The Minute Book**, a recipe browser that draws each recipe's prep and cook time as five-minute bars and filters the list by the time you have. It has light and dark themes and follows your system setting.
+
 ## Stacks
 
 - Vue 3
@@ -15,8 +17,9 @@ This is a simple template utilizing Vue 3 and couple of simple packages to make 
   - Configured with 5-minute cache (`staleTime`)
   - Includes smart cache lookup (e.g., recipe details from cached recipes list)
 - [TanStack Vue Query Devtools](https://tanstack.com/query/latest/docs/vue/devtools) (development only)
-- [PrimeVue (UI component library)](https://primevue.org/)
-- Deployed to Cloudflare Pages
+- [PrimeVue 4 (UI component library, MIT)](https://primevue.org/)
+  - Themed through a design-token preset in `src/theme/preset.ts`
+- Deployed to Netlify (`public/_redirects` serves `index.html` for every route)
 - i18n ... Coming soon!
 - Meta tags ... Coming soon!
 - Layouts ... Coming soon!

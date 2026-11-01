@@ -14,6 +14,11 @@ export interface Recipe {
   prepTimeMinutes?: number;
   cookTimeMinutes?: number;
   servings?: number;
+  caloriesPerServing?: number;
+  rating?: number;
+  reviewCount?: number;
+  tags?: string[];
+  mealType?: string[];
   [key: string]: unknown;
 }
 
@@ -69,22 +74,6 @@ export function getRandomRecipe(recipes: Recipe[]): Recipe | null {
 }
 
 /**
- * Filter out featured recipe from displayed recipes
- * @param recipes - All recipes
- * @param featuredRecipe - Featured recipe to exclude
- * @param limit - Maximum number of recipes to return
- * @returns Filtered recipes
- */
-export function getDisplayedRecipes(
-  recipes: Recipe[],
-  featuredRecipe: Recipe | null,
-  limit = 6
-): Recipe[] {
-  if (!featuredRecipe) return recipes.slice(0, limit);
-  return recipes.filter((r) => r.id !== featuredRecipe.id).slice(0, limit);
-}
-
-/**
  * Parse ingredient to display name
  * Removes leading numbers/measurements (e.g., "2 cups", "1/2 tsp") but preserves
  * ingredients that start with words (e.g., "black pepper", "olive oil")
@@ -111,3 +100,41 @@ export function formatIngredient(
 
   return ingredient;
 }
+
+/**
+ * Total minutes a recipe takes (prep + cook)
+ * @param recipe - The recipe object
+ * @returns Total minutes, 0 when unknown
+ */
+export const getTotalMinutes = (recipe: Recipe | null | undefined): number =>
+  (recipe?.prepTimeMinutes ?? 0) + (recipe?.cookTimeMinutes ?? 0);
+
+/**
+ * Keep recipes that fit in the given minutes, quickest first
+ * @param recipes - All recipes
+ * @param maxMinutes - Time available; null keeps every recipe
+ * @returns Recipes sorted by total minutes
+ */
+export const filterByMinutes = (
+  recipes: Recipe[],
+  maxMinutes: number | null
+): Recipe[] =>
+  recipes
+    .filter(
+      (recipe) => maxMinutes === null || getTotalMinutes(recipe) <= maxMinutes
+    )
+    .sort((first, second) => getTotalMinutes(first) - getTotalMinutes(second));
+
+/**
+ * Split a recipe's clock into blocks (default five minutes each)
+ * @param recipe - The recipe object
+ * @param blockMinutes - Minutes per block
+ * @returns Number of prep and cook blocks, each rounded up
+ */
+export const getMinuteBlocks = (
+  recipe: Recipe | null | undefined,
+  blockMinutes = 5
+): { prep: number; cook: number } => ({
+  prep: Math.ceil((recipe?.prepTimeMinutes ?? 0) / blockMinutes),
+  cook: Math.ceil((recipe?.cookTimeMinutes ?? 0) / blockMinutes),
+});

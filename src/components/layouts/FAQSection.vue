@@ -1,54 +1,47 @@
 <template>
-  <div>
-    <h3 class="mb-6 text-xl font-bold text-gray-900">
-      Got questions? Check out our<br />frequently asked questions.
-    </h3>
-    <div class="space-y-4">
-      <button
-        class="flex items-center justify-between w-full py-3 text-left text-gray-700 transition-colors border-b border-gray-200 hover:text-orange-500"
-        @click="toggleQuestion(0)"
-      >
-        <span>How do I submit a recipe?</span>
-        <ChevronRightIcon />
-      </button>
-      <button
-        class="flex items-center justify-between w-full py-3 text-left text-gray-700 transition-colors border-b border-gray-200 hover:text-orange-500"
-        @click="toggleQuestion(1)"
-      >
-        <span>Can I save my favorite recipes?</span>
-        <ChevronRightIcon />
-      </button>
-      <button
-        class="flex items-center justify-between w-full py-3 text-left text-gray-700 transition-colors border-b border-gray-200 hover:text-orange-500"
-        @click="toggleQuestion(2)"
-      >
-        <span>Are the recipes beginner-friendly?</span>
-        <ChevronRightIcon />
-      </button>
-    </div>
+  <div class="gap-14 lg:columns-2">
+    <p
+      v-for="item in questions"
+      :key="item.question"
+      class="mb-6 break-inside-avoid leading-relaxed"
+    >
+      <strong class="font-medium">{{ item.question }}</strong>
+      {{ item.answer }}
+    </p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
-const ChevronRightIcon = {
-  template: `
-    <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M9 5l7 7-7 7"
-      />
-    </svg>
-  `,
-};
-
-const openQuestion = ref<number | null>(null);
-
-const toggleQuestion = (index: number) => {
-  openQuestion.value = openQuestion.value === index ? null : index;
-  // TODO: Implement accordion behavior
-};
+const questions = [
+  {
+    question: 'How do I submit a recipe?',
+    answer:
+      'Submissions open soon. The Submit a recipe link in the header will take you to the form once it is ready.',
+  },
+  {
+    question: 'Can I save my favourite recipes?',
+    answer:
+      'Not yet. Every recipe has its own address, so a browser bookmark keeps it for now.',
+  },
+  {
+    question: 'Are the recipes beginner-friendly?',
+    answer:
+      'Each one is marked Easy or Medium, and most of the book is Easy. Start with anything under 30 minutes.',
+  },
+  {
+    question: 'What do the bars mean?',
+    answer:
+      'One bar is five minutes. Ink bars are preparation, brass bars are cooking, so the length of the stripe is the length of the job.',
+  },
+  {
+    question: 'Where do the recipes come from?',
+    answer:
+      'From the public DummyJSON recipe collection. Times, servings and ingredients are shown as the source lists them.',
+  },
+  {
+    question: 'Is there a dark version?',
+    answer:
+      'Yes. It follows your device setting, and the sun and moon button in the header switches it by hand.',
+  },
+];
 </script>

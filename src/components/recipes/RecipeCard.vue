@@ -1,58 +1,48 @@
 <template>
   <router-link
     :to="`/recipe/${recipe.id}`"
-    class="block overflow-hidden transition-shadow bg-white shadow-md cursor-pointer rounded-2xl hover:shadow-xl group"
+    class="group grid grid-cols-[3.5rem_1fr_auto] items-start gap-x-4 py-3 transition-colors hover:bg-panel/60 sm:grid-cols-[4.5rem_1fr_auto] sm:px-2"
+    @pointerenter="emit('highlight', recipe)"
+    @focus="emit('highlight', recipe)"
   >
-    <div class="relative">
-      <img
-        :src="imageUrl"
-        :alt="recipe.name"
-        class="object-cover w-full h-56 transition-transform duration-300 group-hover:scale-105"
-      />
-      <div class="absolute top-4 left-4">
-        <span
-          class="px-3 py-1 text-xs font-bold text-white bg-orange-500 rounded-full"
-        >
-          {{ recipe.prepTimeMinutes }} mins
-        </span>
-      </div>
-    </div>
-    <div class="p-6">
-      <div class="flex items-center gap-2 mb-2 text-sm text-gray-500">
+    <img
+      :src="imageUrl"
+      alt=""
+      width="72"
+      height="72"
+      loading="lazy"
+      class="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+    />
+    <div class="min-w-0">
+      <h3
+        class="text-lead leading-tight group-hover:underline decoration-brass decoration-2 underline-offset-4"
+      >
+        {{ recipe.name }}
+      </h3>
+      <div class="mt-1 text-small text-muted">
         <span>{{ recipe.cuisine }}</span>
-        <span>•</span>
+        <span aria-hidden="true"> · </span>
         <span>{{ recipe.difficulty }}</span>
       </div>
-      <h3 class="mb-3 text-xl font-bold text-gray-900">{{ recipe.name }}</h3>
-      <p class="mb-4 text-sm text-gray-600 line-clamp-2">
+      <p class="mt-1 line-clamp-1 text-muted max-sm:hidden">
         {{ preview }}
       </p>
-      <div
-        class="flex items-center gap-1 text-sm font-semibold text-orange-500 transition-all group-hover:gap-2"
-      >
-        View Recipe
-        <svg
-          class="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 5l7 7-7 7"
-          />
-        </svg>
-      </div>
+    </div>
+    <div class="flex flex-col items-end gap-2 pt-1 text-right">
+      <span class="text-small tabular-nums whitespace-nowrap">
+        {{ totalMinutes }} mins
+      </span>
+      <MinuteBand :recipe="recipe" is-compact class="max-sm:hidden" />
     </div>
   </router-link>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import MinuteBand from './MinuteBand.vue';
 import {
   getRecipeImageUrl,
+  getTotalMinutes,
   previewText,
   type Recipe,
 } from '../../utils/recipeUtils';
@@ -67,17 +57,11 @@ const props = withDefaults(
   }
 );
 
+const emit = defineEmits<{ highlight: [recipe: Recipe] }>();
+
 const imageUrl = computed(() => getRecipeImageUrl(props.recipe));
+const totalMinutes = computed(() => getTotalMinutes(props.recipe));
 const preview = computed(() =>
   previewText(props.recipe.instructions, props.previewLength)
 );
 </script>
-
-<style scoped>
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-</style>
