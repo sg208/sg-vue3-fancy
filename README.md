@@ -31,7 +31,7 @@ This project is deployed as a Cloudflare Worker on the sg208 account.
 
 https://sg-vue3-fancy.engg.app
 
-`pnpm deploy` builds and runs `wrangler deploy`; it needs `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in the environment.
+`pnpm run deploy` builds and runs `wrangler deploy`; it needs `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in the environment.
 
 ## Couple of things
 
