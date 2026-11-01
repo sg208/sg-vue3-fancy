@@ -22,10 +22,9 @@ app.use(router);
 app.use(PrimeVue, {
   theme: {
     preset: minuteBookPreset,
+    // `.field-ink` sections print in reverse, so widgets inside take dark tokens.
     options: { darkModeSelector: DARK_MODE_SELECTOR },
   },
-  // PrimeUI licence key, read from the build environment when one is set.
-  license: import.meta.env.VITE_PRIMEUI_LICENSE,
 });
 
 // Register Vue Query with cache configuration

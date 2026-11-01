@@ -4,7 +4,7 @@ import Aura from '@primeuix/themes/aura';
 /*
   "Newsprint and brass": one paper scale serves as both the primary and the
   surface palette, so PrimeVue widgets print in the page's own ink. Brass is
-  kept for the single selected state (see `--accent` in tailwind.css).
+  kept for the single selected state (see `--color-brass` in tailwind.css).
 */
 const paper = {
   0: '#f4f4f0',
@@ -21,7 +21,64 @@ const paper = {
   950: '#181715',
 };
 
-const brass = 'light-dark(#bfb21a, #cfc22a)';
+const brass = { light: '#bfb21a', dark: '#cfc22a' };
+
+// Tokens that differ between the light and dark scheme, written once.
+const scheme = (mode: 'light' | 'dark') => {
+  const isLight = mode === 'light';
+  return {
+    surface: paper,
+    primary: {
+      color: isLight ? '{primary.950}' : '{primary.100}',
+      contrastColor: isLight ? '{primary.100}' : '{primary.950}',
+      hoverColor: isLight ? '{primary.800}' : '{primary.0}',
+      activeColor: isLight ? '{primary.700}' : '{primary.200}',
+    },
+    text: {
+      color: isLight ? '{surface.950}' : '{surface.100}',
+      hoverColor: isLight ? '{surface.950}' : '{surface.0}',
+      mutedColor: isLight ? '{surface.700}' : '{surface.400}',
+      hoverMutedColor: isLight ? '{surface.700}' : '{surface.300}',
+    },
+    content: {
+      background: isLight ? '{surface.100}' : '{surface.950}',
+      hoverBackground: isLight ? '{surface.200}' : '{surface.900}',
+      borderColor: isLight ? '{surface.300}' : '{surface.800}',
+    },
+    highlight: {
+      background: brass[mode],
+      focusBackground: brass[mode],
+      color: '{surface.950}',
+      focusColor: '{surface.950}',
+    },
+    formField: {
+      background: isLight ? '{surface.0}' : '{surface.900}',
+      filledBackground: isLight ? '{surface.50}' : '{surface.800}',
+      borderColor: isLight ? '{surface.600}' : '{surface.500}',
+      hoverBorderColor: isLight ? '{surface.950}' : '{surface.200}',
+      color: '{text.color}',
+      placeholderColor: '{text.muted.color}',
+      shadow: 'none',
+    },
+  };
+};
+
+const toggleScheme = (mode: 'light' | 'dark') => {
+  const ground = mode === 'light' ? '{surface.200}' : '{surface.900}';
+  return {
+    root: {
+      background: ground,
+      hoverBackground: ground,
+      checkedBackground: ground,
+      borderColor: ground,
+      checkedBorderColor: ground,
+      color: mode === 'light' ? '{surface.700}' : '{surface.300}',
+      hoverColor: '{text.color}',
+      checkedColor: '{surface.950}',
+    },
+    content: { checkedBackground: brass[mode] },
+  };
+};
 
 export const minuteBookPreset = definePreset(Aura, {
   primitive: {
@@ -43,84 +100,42 @@ export const minuteBookPreset = definePreset(Aura, {
       offset: '2px',
       shadow: 'none',
     },
-    primary: {
-      ...paper,
-      color: 'light-dark({primary.950}, {primary.100})',
-      contrastColor: 'light-dark({primary.100}, {primary.950})',
-      hoverColor: 'light-dark({primary.800}, {primary.0})',
-      activeColor: 'light-dark({primary.700}, {primary.200})',
-    },
-    surface: paper,
-    text: {
-      color: 'light-dark({surface.950}, {surface.100})',
-      hoverColor: 'light-dark({surface.950}, {surface.0})',
-      mutedColor: 'light-dark({surface.700}, {surface.400})',
-      hoverMutedColor: 'light-dark({surface.700}, {surface.300})',
-    },
-    content: {
-      background: 'light-dark({surface.100}, {surface.950})',
-      hoverBackground: 'light-dark({surface.200}, {surface.900})',
-      borderColor: 'light-dark({surface.300}, {surface.800})',
-    },
-    highlight: {
-      background: brass,
-      focusBackground: brass,
-      color: '{surface.950}',
-      focusColor: '{surface.950}',
-    },
-    formField: {
-      fontSize: '1rem',
-      paddingX: '0.875rem',
-      paddingY: '0.75rem',
-      background: 'light-dark({surface.0}, {surface.900})',
-      filledBackground: 'light-dark({surface.50}, {surface.800})',
-      borderColor: 'light-dark({surface.600}, {surface.500})',
-      hoverBorderColor: 'light-dark({surface.950}, {surface.200})',
-      focusBorderColor: '{primary.color}',
-      color: '{text.color}',
-      placeholderColor: '{text.muted.color}',
-      shadow: 'none',
-    },
+    primary: paper,
+    formField: { paddingX: '0.875rem', paddingY: '0.75rem' },
+    colorScheme: { light: scheme('light'), dark: scheme('dark') },
   },
   components: {
     togglebutton: {
-      root: {
-        background: 'light-dark({surface.200}, {surface.900})',
-        hoverBackground: 'light-dark({surface.200}, {surface.900})',
-        checkedBackground: 'light-dark({surface.200}, {surface.900})',
-        borderColor: 'light-dark({surface.200}, {surface.900})',
-        checkedBorderColor: 'light-dark({surface.200}, {surface.900})',
-        color: 'light-dark({surface.700}, {surface.300})',
-        hoverColor: '{text.color}',
-        checkedColor: '{surface.950}',
-        fontSize: '1rem',
-        padding: '0.25rem',
-      },
-      content: {
-        padding: '0.5rem 0.875rem',
-        checkedBackground: brass,
-        checkedShadow: 'none',
-      },
+      root: { padding: '0.25rem' },
+      content: { padding: '0.5rem 0.875rem', checkedShadow: 'none' },
+      colorScheme: { light: toggleScheme('light'), dark: toggleScheme('dark') },
     },
     tabs: {
-      tablist: { background: 'transparent', borderColor: 'transparent' },
+      tablist: {
+        background: 'transparent',
+        borderColor: 'transparent',
+        borderWidth: '0',
+      },
       tab: {
+        borderWidth: '0',
+        borderColor: 'transparent',
+        hoverBorderColor: 'transparent',
+        activeBorderColor: 'transparent',
         color: '{text.muted.color}',
         hoverColor: '{text.color}',
         activeColor: '{text.color}',
         fontWeight: '500',
-        fontSize: '1rem',
         padding: '0.75rem 1.25rem 0.75rem 0',
       },
       tabpanel: { background: 'transparent', padding: '1.25rem 0 0 0' },
-      activeBar: { height: '3px', background: brass },
+      activeBar: { height: '3px', background: brass.light },
     },
     card: {
-      root: {
-        background: 'light-dark({surface.0}, {surface.900})',
-        shadow: 'none',
+      root: { shadow: 'none' },
+      colorScheme: {
+        light: { root: { background: '{surface.0}' } },
+        dark: { root: { background: '{surface.900}' } },
       },
-      subtitle: { color: '{text.muted.color}' },
     },
     button: {
       root: {

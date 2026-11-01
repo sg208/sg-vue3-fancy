@@ -1,8 +1,9 @@
 <template>
+  <!-- `app-dark` gives PrimeVue widgets in this reversed section dark tokens. -->
   <section
     id="questions"
     aria-labelledby="questions-heading"
-    class="field-ink scroll-mt-4 px-4 py-24 sm:px-6 lg:py-40"
+    class="field-ink app-dark scroll-mt-4 px-4 py-24 sm:px-6 lg:py-40"
   >
     <div class="grid gap-12 lg:grid-cols-12 lg:gap-8">
       <h2 id="questions-heading" class="text-head lg:col-span-4">

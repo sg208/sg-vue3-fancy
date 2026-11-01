@@ -15,6 +15,7 @@
           v-model="email"
           type="email"
           autocomplete="email"
+          :dt="reversedField"
           :invalid="hasError"
           :aria-describedby="hasError ? 'newsletter-error' : undefined"
           class="min-h-12 flex-1"
@@ -37,6 +38,15 @@
 import { ref } from 'vue';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
+
+// Scoped design tokens: this form sits on the reversed (ink) section.
+const reversedField = {
+  background: '{surface.900}',
+  borderColor: '{surface.500}',
+  hoverBorderColor: '{surface.200}',
+  focusBorderColor: '{surface.100}',
+  color: '{surface.100}',
+};
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
