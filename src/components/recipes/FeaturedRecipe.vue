@@ -1,50 +1,66 @@
 <template>
-  <div class="max-w-5xl mx-auto">
-    <div
-      class="flex flex-col overflow-hidden bg-white shadow-lg rounded-3xl md:flex-row"
-    >
-      <div class="relative md:w-1/2">
-        <img
-          :src="imageUrl"
-          :alt="recipe.name"
-          class="w-full h-full object-cover min-h-[400px]"
-        />
+  <div class="grid gap-8 lg:grid-cols-2 lg:gap-16">
+    <img
+      :src="imageUrl"
+      :alt="recipe.name"
+      width="1024"
+      height="1024"
+      loading="lazy"
+      class="aspect-square w-full object-cover"
+    />
+    <div class="flex min-w-0 flex-col gap-8 lg:justify-between lg:py-4">
+      <div>
+        <h2 :id="headingId" class="text-head">{{ recipe.name }}</h2>
+        <p class="mt-6 max-w-[38ch] text-lead">
+          Today's pick: {{ recipe.cuisine }},
+          {{ recipe.difficulty?.toLowerCase() }}, ready in
+          {{ totalMinutes }} minutes for {{ recipe.servings }}.
+        </p>
       </div>
-      <div class="flex flex-col justify-between p-8 md:w-1/2 md:p-10">
-        <div>
-          <div class="flex items-center gap-3 mb-4">
-            <span class="text-sm font-medium text-orange-500"
-              >{{ recipe.prepTimeMinutes }} mins</span
-            >
-            <span class="text-sm font-medium text-green-600">{{
-              recipe.difficulty
-            }}</span>
-          </div>
-          <h2 class="mb-4 text-3xl font-bold text-gray-900">
-            {{ recipe.name }}
-          </h2>
-          <p class="mb-6 leading-relaxed text-gray-600">
-            {{ preview }}
-          </p>
-          <div class="mb-6">
-            <h3 class="mb-3 font-semibold text-gray-900">Key Ingredients:</h3>
-            <div class="flex flex-wrap gap-2">
-              <span
-                v-for="ingredient in displayedIngredients"
-                :key="ingredient"
-                class="px-3 py-1 text-sm text-gray-700 bg-gray-100 rounded-full"
+
+      <Tabs value="ingredients">
+        <TabList>
+          <Tab value="ingredients">Ingredients</Tab>
+          <Tab value="method">Method</Tab>
+          <Tab value="clock">The clock</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel value="ingredients">
+            <ul class="columns-1 gap-8 sm:columns-2">
+              <li
+                v-for="item in recipe.ingredients"
+                :key="item"
+                class="break-inside-avoid py-1"
               >
-                {{ ingredient }}
-              </span>
-            </div>
-          </div>
-        </div>
-        <router-link
-          :to="`/recipe/${recipe.id}`"
-          class="block w-full py-3 font-semibold text-center text-white transition-colors bg-orange-500 rounded-lg hover:bg-orange-600"
-        >
-          View Full Recipe
+                {{ item }}
+              </li>
+            </ul>
+          </TabPanel>
+          <TabPanel value="method">
+            <p class="max-w-[60ch]">{{ preview }}</p>
+          </TabPanel>
+          <TabPanel value="clock">
+            <MinuteBand :recipe="recipe" is-on-panel />
+            <p class="mt-3 text-small text-muted">
+              {{ recipe.prepTimeMinutes }} minutes prep in ink,
+              {{ recipe.cookTimeMinutes }} minutes cooking in brass. One bar is
+              five minutes.
+            </p>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+
+      <div class="grid gap-3 sm:grid-cols-2">
+        <router-link :to="`/recipe/${recipe.id}`" class="btn min-h-16">
+          Read the full recipe
         </router-link>
+        <button
+          type="button"
+          class="btn btn-quiet min-h-16 bg-paper hover:bg-paper/70"
+          @click="emit('shuffle')"
+        >
+          Pick another
+        </button>
       </div>
     </div>
   </div>
@@ -52,10 +68,16 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import Tabs from 'primevue/tabs';
+import TabList from 'primevue/tablist';
+import Tab from 'primevue/tab';
+import TabPanels from 'primevue/tabpanels';
+import TabPanel from 'primevue/tabpanel';
+import MinuteBand from './MinuteBand.vue';
 import {
   getRecipeImageUrl,
+  getTotalMinutes,
   previewText,
-  formatIngredient,
   type Recipe,
 } from '../../utils/recipeUtils';
 
@@ -63,25 +85,19 @@ const props = withDefaults(
   defineProps<{
     recipe: Recipe;
     previewLength?: number;
-    maxIngredients?: number;
+    headingId?: string;
   }>(),
   {
-    previewLength: 180,
-    maxIngredients: 4,
+    previewLength: 320,
+    headingId: 'todays-plate-heading',
   }
 );
 
+const emit = defineEmits<{ shuffle: [] }>();
+
 const imageUrl = computed(() => getRecipeImageUrl(props.recipe));
+const totalMinutes = computed(() => getTotalMinutes(props.recipe));
 const preview = computed(() =>
   previewText(props.recipe.instructions, props.previewLength)
 );
-
-const displayedIngredients = computed(() => {
-  if (!props.recipe.ingredients || !Array.isArray(props.recipe.ingredients)) {
-    return [];
-  }
-  return props.recipe.ingredients
-    .slice(0, props.maxIngredients)
-    .map(formatIngredient);
-});
 </script>

@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Redesigned the demo as The Minute Book: split-screen layout, Boska type, newsprint and brass palette, prep and cook times drawn as five-minute bars.
+- PrimeVue is themed through a design-token preset instead of CSS overrides.
+- Pinned PrimeVue to 4.x, `@primeuix/themes` to 2.x and PrimeIcons to 7.x (MIT). PrimeVue 5 and PrimeIcons 8 moved to the PrimeUI license, which needs a license key and shows a notice without one.
+- The home list can be filtered by available minutes and is sorted quickest first.
+- The FAQ shows every answer; the newsletter form confirms inline instead of with an alert.
+
+### Added
+
+- Light and dark themes with a header toggle, skip link, per-page titles and focus moved to the page heading after navigation.
+- SVG favicon and a Netlify SPA fallback (`public/_redirects`).
+
+### Removed
+
+- Unused `getDisplayedRecipes` helper.
+- Placeholder social links in the footer (they pointed to `#`).
+
 ## [0.1.0] - 2026-10-31
 
 ### Added
@@ -22,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- Unused `getDisplayedRecipes` helper.
 - `vite-plugin-eslint`, `@eslint/eslintrc`, `.eslintrc.cjs`, `postcss.config.cjs`, `tailwind.config.js`, `autoprefixer`, `@tailwindcss/aspect-ratio`
 
 ### Security
@@ -39,6 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- Unused `getDisplayedRecipes` helper.
 - HelloWorld component
 - Nav subcomponents (Logo, SubmitRecipeButton)
 - RecipeDetail subcomponents (BackButton, RecipeDetailSkeleton, RecipeHeader, RecipeIngredients, RecipeInstructions, RecipeNotFound)

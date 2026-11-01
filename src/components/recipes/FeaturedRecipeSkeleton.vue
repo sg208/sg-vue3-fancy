@@ -1,14 +1,14 @@
 <template>
-  <div class="max-w-5xl mx-auto">
-    <div
-      class="flex flex-col overflow-hidden bg-white shadow-lg rounded-3xl md:flex-row"
-    >
-      <div class="bg-gray-200 md:w-1/2 h-80 animate-pulse"></div>
-      <div class="p-8 md:w-1/2">
-        <div class="w-1/3 h-6 mb-4 bg-gray-200 rounded-sm animate-pulse"></div>
-        <div class="w-3/4 h-8 mb-4 bg-gray-200 rounded-sm animate-pulse"></div>
-        <div class="h-20 mb-4 bg-gray-200 rounded-sm animate-pulse"></div>
-      </div>
+  <div class="grid gap-8 lg:grid-cols-2 lg:gap-16" aria-hidden="true">
+    <Skeleton class="aspect-square" height="auto" border-radius="0" />
+    <div class="space-y-6 lg:py-4">
+      <Skeleton width="80%" height="3.5rem" />
+      <Skeleton width="60%" height="1.5rem" />
+      <Skeleton height="10rem" />
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import Skeleton from 'primevue/skeleton';
+</script>
