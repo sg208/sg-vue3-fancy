@@ -74,22 +74,6 @@ export function getRandomRecipe(recipes: Recipe[]): Recipe | null {
 }
 
 /**
- * Filter out featured recipe from displayed recipes
- * @param recipes - All recipes
- * @param featuredRecipe - Featured recipe to exclude
- * @param limit - Maximum number of recipes to return
- * @returns Filtered recipes
- */
-export function getDisplayedRecipes(
-  recipes: Recipe[],
-  featuredRecipe: Recipe | null,
-  limit = 6
-): Recipe[] {
-  if (!featuredRecipe) return recipes.slice(0, limit);
-  return recipes.filter((r) => r.id !== featuredRecipe.id).slice(0, limit);
-}
-
-/**
  * Parse ingredient to display name
  * Removes leading numbers/measurements (e.g., "2 cups", "1/2 tsp") but preserves
  * ingredients that start with words (e.g., "black pepper", "olive oil")

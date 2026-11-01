@@ -3,7 +3,6 @@ import {
   formatIngredient,
   formatInstructions,
   filterByMinutes,
-  getDisplayedRecipes,
   getMinuteBlocks,
   getRandomRecipe,
   getRecipeImageUrl,
@@ -71,18 +70,6 @@ describe('getRandomRecipe', () => {
   it('returns one of the given recipes', () => {
     const recipes = makeRecipes(3);
     expect(recipes).toContain(getRandomRecipe(recipes));
-  });
-});
-
-describe('getDisplayedRecipes', () => {
-  it('limits the list when there is no featured recipe', () => {
-    expect(getDisplayedRecipes(makeRecipes(10), null)).toHaveLength(6);
-  });
-
-  it('excludes the featured recipe', () => {
-    const recipes = makeRecipes(4);
-    const displayed = getDisplayedRecipes(recipes, recipes[1], 6);
-    expect(displayed.map((recipe) => recipe.id)).toEqual([1, 3, 4]);
   });
 });
 
