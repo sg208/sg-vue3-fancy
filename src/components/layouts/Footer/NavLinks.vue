@@ -1,15 +1,11 @@
 <template>
-  <div
-    class="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-600"
-  >
-    <router-link to="/privacy-policy" class="hover:text-orange-500"
-      >Privacy Policy</router-link
-    >
-    <router-link to="/terms" class="hover:text-orange-500"
-      >Terms & Conditions</router-link
-    >
-    <router-link to="/contact" class="hover:text-orange-500"
-      >Contact</router-link
-    >
-  </div>
+  <nav aria-label="Site information">
+    <ul class="flex flex-wrap gap-x-6 gap-y-1">
+      <li>
+        <router-link to="/privacy-policy" class="link">Privacy</router-link>
+      </li>
+      <li><router-link to="/terms" class="link">Terms</router-link></li>
+      <li><router-link to="/contact" class="link">Contact</router-link></li>
+    </ul>
+  </nav>
 </template>

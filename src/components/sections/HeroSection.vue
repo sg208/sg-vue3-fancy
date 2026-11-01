@@ -1,33 +1,45 @@
 <template>
-  <section class="py-16 bg-linear-to-b from-orange-50 to-white">
-    <div class="container px-4 mx-auto">
-      <div class="mb-12 text-center">
-        <p
-          class="mb-2 text-sm font-semibold tracking-wider text-orange-500 uppercase"
-        >
-          Featured Recipe
-        </p>
-        <h1 class="text-5xl font-bold text-gray-900">
-          Discover Today's <span class="font-serif italic">Special</span>
-        </h1>
-        <p class="mt-3 text-gray-600">
-          Handpicked recipes that bring joy to your kitchen
-        </p>
-      </div>
+  <section
+    aria-labelledby="hero-heading"
+    class="relative z-10 -mt-6 bg-panel px-5 pt-5 pb-8 sm:px-8 lg:mt-0 lg:flex lg:min-h-[calc(100svh-6rem)] lg:flex-col lg:pb-10"
+  >
+    <MinuteBand v-if="featured" :recipe="featured" is-on-panel class="reveal" />
+    <Skeleton v-else height="3.5rem" border-radius="0" />
+    <p v-if="featured" class="reveal mt-3 text-small text-muted" style="--i: 1">
+      Today: {{ featured.name }}, {{ featured.prepTimeMinutes }} min prep and
+      {{ featured.cookTimeMinutes }} min cooking.
+    </p>
 
-      <FeaturedRecipeSkeleton v-if="loading" />
-      <FeaturedRecipe v-else-if="featured" :recipe="featured" />
+    <div class="flex flex-1 flex-col justify-center py-12 lg:py-16">
+      <h1 id="hero-heading" class="reveal text-head" style="--i: 2">
+        Recipes, timed to the minute
+      </h1>
+      <p class="reveal mt-8 max-w-[40ch] text-lead" style="--i: 3">
+        Thirty dishes from around the world, each with its prep and cook time
+        drawn as five-minute bars. Say how long you have; the book keeps what
+        fits.
+      </p>
+      <div class="reveal mt-10" style="--i: 4">
+        <a href="#recipes" class="btn">Find a recipe that fits</a>
+      </div>
     </div>
+
+    <nav aria-label="On this page" class="text-small">
+      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+        <li><a href="#recipes" class="link">The list</a></li>
+        <li><a href="#todays-plate" class="link">Today's plate</a></li>
+        <li><a href="#questions" class="link">Questions</a></li>
+      </ul>
+    </nav>
   </section>
 </template>
 
 <script setup lang="ts">
-import FeaturedRecipe from '../recipes/FeaturedRecipe.vue';
-import FeaturedRecipeSkeleton from '../recipes/FeaturedRecipeSkeleton.vue';
+import Skeleton from 'primevue/skeleton';
+import MinuteBand from '../recipes/MinuteBand.vue';
 import type { Recipe } from '../../utils/recipeUtils';
 
 defineProps<{
   featured?: Recipe | null;
-  loading?: boolean;
 }>();
 </script>
