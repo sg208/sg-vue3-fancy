@@ -14,6 +14,11 @@ export interface Recipe {
   prepTimeMinutes?: number;
   cookTimeMinutes?: number;
   servings?: number;
+  caloriesPerServing?: number;
+  rating?: number;
+  reviewCount?: number;
+  tags?: string[];
+  mealType?: string[];
   [key: string]: unknown;
 }
 
@@ -111,3 +116,41 @@ export function formatIngredient(
 
   return ingredient;
 }
+
+/**
+ * Total minutes a recipe takes (prep + cook)
+ * @param recipe - The recipe object
+ * @returns Total minutes, 0 when unknown
+ */
+export const getTotalMinutes = (recipe: Recipe | null | undefined): number =>
+  (recipe?.prepTimeMinutes ?? 0) + (recipe?.cookTimeMinutes ?? 0);
+
+/**
+ * Keep recipes that fit in the given minutes, quickest first
+ * @param recipes - All recipes
+ * @param maxMinutes - Time available; null keeps every recipe
+ * @returns Recipes sorted by total minutes
+ */
+export const filterByMinutes = (
+  recipes: Recipe[],
+  maxMinutes: number | null
+): Recipe[] =>
+  recipes
+    .filter(
+      (recipe) => maxMinutes === null || getTotalMinutes(recipe) <= maxMinutes
+    )
+    .sort((first, second) => getTotalMinutes(first) - getTotalMinutes(second));
+
+/**
+ * Split a recipe's clock into blocks (default five minutes each)
+ * @param recipe - The recipe object
+ * @param blockMinutes - Minutes per block
+ * @returns Number of prep and cook blocks, each rounded up
+ */
+export const getMinuteBlocks = (
+  recipe: Recipe | null | undefined,
+  blockMinutes = 5
+): { prep: number; cook: number } => ({
+  prep: Math.ceil((recipe?.prepTimeMinutes ?? 0) / blockMinutes),
+  cook: Math.ceil((recipe?.cookTimeMinutes ?? 0) / blockMinutes),
+});
