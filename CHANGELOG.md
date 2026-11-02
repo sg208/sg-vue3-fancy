@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-11-02
+
+### Changed
+
+- **GitHub link in the footer**: the "Source on GitHub" text link is now a small GitHub icon. It opens the repo in a new tab and screen readers announce it as "Source code on GitHub (opens in a new tab)". The privacy page wording now matches.
+
 ## [0.3.0] - 2026-11-01
 
 ### Added
