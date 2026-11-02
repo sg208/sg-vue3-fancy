@@ -43,11 +43,21 @@ describe('footer', () => {
     );
   });
 
-  it('links to the GitHub repository', () => {
-    const link = mount(Copyright).find('a');
+  it('links to the GitHub repository with one labelled icon', () => {
+    const links = mount(Copyright).findAll('a');
+    expect(links).toHaveLength(1);
+    const [link] = links;
     expect(link.attributes('href')).toBe(
       'https://github.com/sg208/sg-vue3-fancy'
     );
-    expect(link.text()).toContain('GitHub');
+    expect(link.attributes('aria-label')).toBe(
+      'Source code on GitHub (opens in a new tab)'
+    );
+    expect(link.attributes('target')).toBe('_blank');
+    expect(link.attributes('rel')).toBe('noopener noreferrer');
+    expect(link.text()).toBe('');
+    const icon = link.find('svg');
+    expect(icon.attributes('aria-hidden')).toBe('true');
+    expect(icon.attributes('focusable')).toBe('false');
   });
 });
