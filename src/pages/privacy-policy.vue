@@ -48,8 +48,8 @@
       beyond what your browser sends with every request.
     </p>
     <p>
-      The "Source on GitHub" link in the footer takes you to GitHub, which then
-      applies its own policy.
+      The GitHub icon in the footer takes you to GitHub, which then applies its
+      own policy.
     </p>
 
     <h2>Questions</h2>
