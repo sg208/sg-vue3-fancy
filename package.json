@@ -66,6 +66,10 @@
     "ignoredBuiltDependencies": [
       "@parcel/watcher",
       "vue-demi"
-    ]
+    ],
+    "overrides": {
+      "glob": ">=14.0.2",
+      "postcss-selector-parser": ">=6.1.5"
+    }
   }
 }
