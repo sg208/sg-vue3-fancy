@@ -3,10 +3,15 @@
     <div class="grid gap-3 px-3 lg:grid-cols-2 lg:items-start">
       <StickyPlate :recipe="activeRecipe" class="lg:order-last" />
       <div class="min-w-0">
-        <HeroSection :featured="featured" />
+        <HeroSection
+          :featured="featured"
+          :error="error"
+          :count="recipes.length"
+        />
         <RecipeGridSection
           :recipes="listedRecipes"
-          :loading="loading"
+          :is-loading="isLoading"
+          :error="error"
           @highlight="handleHighlight"
         />
       </div>
@@ -17,7 +22,7 @@
       aria-labelledby="todays-plate-heading"
       class="scroll-mt-4 bg-panel px-4 py-24 mt-32 sm:px-6 lg:mt-48 lg:py-32"
     >
-      <FeaturedRecipeSkeleton v-if="loading" />
+      <FeaturedRecipeSkeleton v-if="isLoading" />
       <FeaturedRecipe
         v-else-if="featured"
         :recipe="featured"
@@ -43,7 +48,7 @@ import FeaturedRecipeSkeleton from '../components/recipes/FeaturedRecipeSkeleton
 
 usePageTitle(undefined);
 
-const { recipes, isLoading: loading } = useRecipes();
+const { recipes, isLoading, error } = useRecipes();
 const featured = ref<Recipe | null>(null);
 const highlighted = ref<Recipe | null>(null);
 

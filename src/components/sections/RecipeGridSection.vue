@@ -15,9 +15,13 @@
       {{ summary }}
     </p>
 
-    <ul v-if="loading" class="mt-4" aria-hidden="true">
+    <ul v-if="isLoading" class="mt-4" aria-hidden="true">
       <li v-for="n in 6" :key="n"><RecipeCardSkeleton /></li>
     </ul>
+
+    <p v-else-if="error" class="mt-8 text-lead" role="alert">
+      The recipes could not be loaded. Check your connection and try again.
+    </p>
 
     <ul v-else-if="visibleRecipes.length" ref="listRef" class="mt-4">
       <li
@@ -54,7 +58,8 @@ import { filterByMinutes, type Recipe } from '../../utils/recipeUtils';
 
 const props = defineProps<{
   recipes?: Recipe[];
-  loading?: boolean;
+  isLoading?: boolean;
+  error?: Error | null;
 }>();
 
 const emit = defineEmits<{ highlight: [recipe: Recipe] }>();
@@ -82,7 +87,8 @@ const handleShowAll = async () => {
   listRef.value?.querySelectorAll('a')[INITIAL_ROWS]?.focus();
 };
 const summary = computed(() => {
-  if (props.loading) return 'Loading the book…';
+  if (props.isLoading) return 'Loading the book…';
+  if (props.error) return 'The book could not be loaded.';
   const count = matchingRecipes.value.length;
   const noun = count === 1 ? 'recipe' : 'recipes';
   return maxMinutes.value

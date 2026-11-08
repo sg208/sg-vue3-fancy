@@ -15,7 +15,6 @@ initColorScheme();
 
 const app = createApp(App);
 
-// Add router
 app.use(router);
 
 // PrimeVue themed through its design tokens (src/theme/preset.ts)
@@ -27,13 +26,13 @@ app.use(PrimeVue, {
   },
 });
 
-// Register Vue Query with cache configuration
+// Fresh for 5 minutes, kept in cache for 10 so the detail page can reuse the list.
 app.use(VueQueryPlugin, {
   queryClientConfig: {
     defaultOptions: {
       queries: {
-        staleTime: 5 * 60 * 1000, // 5 minutes - data is fresh, won't refetch
-        gcTime: 10 * 60 * 1000, // 10 minutes - keep unused data in cache for smart lookups
+        staleTime: 5 * 60 * 1000,
+        gcTime: 10 * 60 * 1000,
       },
     },
   },

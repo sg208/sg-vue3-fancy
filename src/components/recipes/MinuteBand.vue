@@ -9,7 +9,7 @@
       v-for="block in blocks"
       :key="block.key"
       class="block"
-      :class="[colourFor(block.kind), isCompact ? 'w-1' : 'min-w-0 flex-1']"
+      :class="[classFor(block.kind), isCompact ? 'w-1' : 'min-w-0 flex-1']"
     />
   </div>
 </template>
@@ -34,14 +34,19 @@ const props = defineProps<{
 const blocks = computed(() => {
   const { prep, cook } = getMinuteBlocks(props.recipe);
   const length = Math.max(TRACK_BLOCKS, prep + cook);
-  return Array.from({ length }, (_, i) => {
-    const kind: BlockKind =
-      i < prep ? 'prep' : i < prep + cook ? 'cook' : 'idle';
-    return { key: i, kind };
-  });
+  return Array.from({ length }, (_, i) => ({
+    key: i,
+    kind: kindAt(i, prep, cook),
+  }));
 });
 
-const colourFor = (kind: BlockKind): string => {
+const kindAt = (index: number, prep: number, cook: number): BlockKind => {
+  if (index < prep) return 'prep';
+  if (index < prep + cook) return 'cook';
+  return 'idle';
+};
+
+const classFor = (kind: BlockKind): string => {
   if (kind === 'prep') return 'bg-ink';
   if (kind === 'cook') return 'bg-cook';
   return props.isOnPanel ? 'bg-paper' : 'bg-panel';
