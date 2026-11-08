@@ -21,7 +21,7 @@ const PLACEHOLDER_IMAGE_URL = '/recipe-placeholder.svg';
 
 /** The recipe photo, or the local placeholder when the API sends none. */
 export const getRecipeImageUrl = (recipe: Recipe | null | undefined): string =>
-  recipe?.image ?? PLACEHOLDER_IMAGE_URL;
+  recipe?.image || PLACEHOLDER_IMAGE_URL;
 
 /** Joins step arrays and cuts the text at maxLength with an ellipsis. */
 export const previewText = (

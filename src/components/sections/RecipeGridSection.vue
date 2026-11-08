@@ -19,7 +19,11 @@
       <li v-for="n in 6" :key="n"><RecipeCardSkeleton /></li>
     </ul>
 
-    <p v-else-if="error" class="mt-8 text-lead" role="alert">
+    <p
+      v-else-if="error && !recipes?.length"
+      class="mt-8 text-lead"
+      role="alert"
+    >
       The recipes could not be loaded. Check your connection and try again.
     </p>
 
@@ -88,7 +92,8 @@ const handleShowAll = async () => {
 };
 const summary = computed(() => {
   if (props.isLoading) return 'Loading the book…';
-  if (props.error) return 'The book could not be loaded.';
+  if (props.error && !props.recipes?.length)
+    return 'The book could not be loaded.';
   const count = matchingRecipes.value.length;
   const noun = count === 1 ? 'recipe' : 'recipes';
   return maxMinutes.value

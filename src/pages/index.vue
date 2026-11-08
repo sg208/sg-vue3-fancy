@@ -18,6 +18,7 @@
     </div>
 
     <section
+      v-if="isLoading || featured"
       id="todays-plate"
       aria-labelledby="todays-plate-heading"
       class="scroll-mt-4 bg-panel px-4 py-24 mt-32 sm:px-6 lg:mt-48 lg:py-32"

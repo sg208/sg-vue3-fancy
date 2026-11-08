@@ -28,6 +28,12 @@ describe('getRecipeImageUrl', () => {
     );
   });
 
+  it('falls back to the local placeholder for an empty image', () => {
+    expect(getRecipeImageUrl({ id: 1, name: 'Soup', image: '' })).toBe(
+      '/recipe-placeholder.svg'
+    );
+  });
+
   it('falls back to the local placeholder without a recipe', () => {
     expect(getRecipeImageUrl(null)).toBe('/recipe-placeholder.svg');
   });

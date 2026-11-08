@@ -19,6 +19,16 @@ describe('RecipeGridSection', () => {
     expect(wrapper.text()).not.toContain('Nothing in the book is that quick');
   });
 
+  it('keeps showing cached recipes when a background refetch fails', () => {
+    const wrapper = mountGrid({
+      recipes: [{ id: 1, name: 'Soup', prepTimeMinutes: 5 }],
+      error: new Error('offline'),
+    });
+
+    expect(wrapper.find('[role=alert]').exists()).toBe(false);
+    expect(wrapper.text()).not.toContain('The book could not be loaded.');
+  });
+
   it('shows skeleton rows while loading', () => {
     const wrapper = mountGrid({ recipes: [], isLoading: true });
 
