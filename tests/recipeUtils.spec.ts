@@ -1,7 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import {
-  formatIngredient,
-  formatInstructions,
   filterByMinutes,
   getMinuteBlocks,
   getRandomRecipe,
@@ -24,16 +22,20 @@ describe('getRecipeImageUrl', () => {
     );
   });
 
-  it('falls back to an encoded name query', () => {
+  it('falls back to the local placeholder without an image', () => {
     expect(getRecipeImageUrl({ id: 1, name: 'Mac & Cheese' })).toBe(
-      'https://source.unsplash.com/800x600/?Mac%20%26%20Cheese'
+      '/recipe-placeholder.svg'
     );
   });
 
-  it('falls back to "food" without a recipe', () => {
-    expect(getRecipeImageUrl(null)).toBe(
-      'https://source.unsplash.com/800x600/?food'
+  it('falls back to the local placeholder for an empty image', () => {
+    expect(getRecipeImageUrl({ id: 1, name: 'Soup', image: '' })).toBe(
+      '/recipe-placeholder.svg'
     );
+  });
+
+  it('falls back to the local placeholder without a recipe', () => {
+    expect(getRecipeImageUrl(null)).toBe('/recipe-placeholder.svg');
   });
 });
 
@@ -52,16 +54,6 @@ describe('previewText', () => {
   });
 });
 
-describe('formatInstructions', () => {
-  it('joins step arrays with spaces', () => {
-    expect(formatInstructions(['Boil.', 'Serve.'])).toBe('Boil. Serve.');
-  });
-
-  it('returns an empty string for null', () => {
-    expect(formatInstructions(null)).toBe('');
-  });
-});
-
 describe('getRandomRecipe', () => {
   it('returns null for an empty list', () => {
     expect(getRandomRecipe([])).toBeNull();
@@ -70,23 +62,6 @@ describe('getRandomRecipe', () => {
   it('returns one of the given recipes', () => {
     const recipes = makeRecipes(3);
     expect(recipes).toContain(getRandomRecipe(recipes));
-  });
-});
-
-describe('formatIngredient', () => {
-  it('drops a leading number or fraction', () => {
-    expect(formatIngredient('2 eggs')).toBe('eggs');
-    expect(formatIngredient('1/2 cup flour')).toBe('cup flour');
-    expect(formatIngredient('0.5 lemon')).toBe('lemon');
-  });
-
-  it('keeps ingredients that start with a word', () => {
-    expect(formatIngredient('black pepper')).toBe('black pepper');
-  });
-
-  it('keeps a lone number and handles empty input', () => {
-    expect(formatIngredient('2')).toBe('2');
-    expect(formatIngredient(null)).toBe('');
   });
 });
 

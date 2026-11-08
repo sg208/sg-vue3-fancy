@@ -1,5 +1,5 @@
 <template>
-  <div v-if="loading" class="grid gap-3 px-3 lg:grid-cols-2" aria-busy="true">
+  <div v-if="isLoading" class="grid gap-3 px-3 lg:grid-cols-2" aria-busy="true">
     <Skeleton class="h-[48svh] lg:h-[calc(100svh-1.5rem)]" border-radius="0" />
     <div class="space-y-6 px-1 py-8 sm:px-6">
       <span class="sr-only" role="status">Loading the recipe…</span>
@@ -126,7 +126,7 @@ const getCachedRecipe = (): Recipe | undefined =>
 
 const {
   recipe,
-  isLoading: loading,
+  isLoading,
   error: queryError,
 } = useRecipe(recipeId, { initialData: getCachedRecipe });
 

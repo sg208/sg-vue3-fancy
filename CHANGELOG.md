@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.3] - 2026-11-08
+
+### Added
+
+- **Load error message**: when the recipes cannot be fetched, the home page now says so instead of showing an empty list and a skeleton that never finishes.
+
+### Changed
+
+- **Blog page**: it is now a plain "coming soon" page. The sample composables it used to show were removed.
+- **Hero count**: the number of dishes in the intro now comes from the recipe data.
+
+### Fixed
+
+- **Missing recipe photos**: a recipe without an image, or with an empty image address, now shows a local placeholder. The old fallback pointed at an Unsplash address that no longer answers.
+- **Slow or failing recipe API**: recipe requests give up after 10 seconds and retry once, so the error message shows in about 21 seconds instead of the skeleton staying up. Recipes already on screen stay there when a background refresh fails.
+- **Today's plate after a load error**: the section and its link in the intro are hidden when there is no featured recipe to show.
+
+## [0.3.2] - 2026-11-04
+
+### Changed
+
+- **Dependency advisories**: pnpm overrides pin patched versions of `glob` and `postcss-selector-parser`.
+
 ## [0.3.1] - 2026-11-02
 
 ### Changed

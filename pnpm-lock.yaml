@@ -18,9 +18,6 @@ importers:
       '@tanstack/vue-query':
         specifier: ^5.105.0
         version: 5.105.0(vue@3.5.44(typescript@6.0.3))
-      '@tanstack/vue-query-devtools':
-        specifier: ^6.3.6
-        version: 6.3.6(@tanstack/vue-query@5.105.0(vue@3.5.44(typescript@6.0.3)))(csstype@3.2.3)(vue@3.5.44(typescript@6.0.3))
       primeicons:
         specifier: ^7.0.0
         version: 7.0.0
@@ -49,6 +46,9 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.3.3
         version: 4.3.3(vite@8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.107.1)(yaml@2.9.1))
+      '@tanstack/vue-query-devtools':
+        specifier: ^6.3.6
+        version: 6.3.6(@tanstack/vue-query@5.105.0(vue@3.5.44(typescript@6.0.3)))(csstype@3.2.3)(vue@3.5.44(typescript@6.0.3))
       '@types/node':
         specifier: ^24.19.2
         version: 24.19.2
