@@ -6,6 +6,7 @@
         <HeroSection
           :featured="featured"
           :error="error"
+          :is-loading="isLoading"
           :count="recipes.length"
         />
         <RecipeGridSection

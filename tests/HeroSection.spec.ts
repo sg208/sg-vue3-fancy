@@ -27,4 +27,16 @@ describe('HeroSection', () => {
       'Dishes from around the world'
     );
   });
+
+  it("drops the Today's plate link when that section is not rendered", () => {
+    const wrapper = mountHero({ featured: null, error: new Error('offline') });
+
+    expect(wrapper.find('a[href="#todays-plate"]').exists()).toBe(false);
+  });
+
+  it("keeps the Today's plate link while loading", () => {
+    const wrapper = mountHero({ featured: null, isLoading: true });
+
+    expect(wrapper.find('a[href="#todays-plate"]').exists()).toBe(true);
+  });
 });

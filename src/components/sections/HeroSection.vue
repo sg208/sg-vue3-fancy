@@ -30,7 +30,9 @@
     <nav aria-label="On this page" class="text-small">
       <ul class="flex flex-wrap gap-x-6 gap-y-2">
         <li><a href="#recipes" class="link">The list</a></li>
-        <li><a href="#todays-plate" class="link">Today's plate</a></li>
+        <li v-if="isLoading || featured">
+          <a href="#todays-plate" class="link">Today's plate</a>
+        </li>
         <li><a href="#questions" class="link">Questions</a></li>
       </ul>
     </nav>
@@ -46,6 +48,7 @@ import type { Recipe } from '../../utils/recipeUtils';
 const props = defineProps<{
   featured?: Recipe | null;
   error?: Error | null;
+  isLoading?: boolean;
   count?: number;
 }>();
 
